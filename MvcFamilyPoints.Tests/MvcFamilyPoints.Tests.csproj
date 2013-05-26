@@ -100,14 +100,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BehaviorTest.cs" />
-    <Compile Include="ChildTest.cs" />
-    <Compile Include="TransactionTest.cs" />
-    <Compile Include="FamilyTest.cs" />
-    <Compile Include="ParentTest.cs" />
-    <Compile Include="FamilyPointsContextInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RewardsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config">

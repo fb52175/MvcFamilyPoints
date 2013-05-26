@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MvcFamilyPoints.Domain;
+using FamilyPointsDomain;
 using System.Data;
 using System.Linq;
 using System.Collections.Generic;
@@ -10,9 +10,8 @@ using System.Data.Entity;
 namespace MvcFamilyPoints.Tests
 {
     
-    
     [TestClass]
-    public class ParentsUnitTests
+    public class FamilysUnitTests
     {
         [ClassInitialize()]
         public static void DataLayerSetup(TestContext testContext)
@@ -25,7 +24,7 @@ namespace MvcFamilyPoints.Tests
         /// This should fail if you have an empty table
         /// </summary>
         [TestMethod]
-        public void ParentsRepositoryContainsData()
+        public void FamilysRepositoryContainsData()
         {
 
             // arrange 
@@ -33,10 +32,10 @@ namespace MvcFamilyPoints.Tests
             FamilyPointsContext db = new FamilyPointsContext();
 
             // act -- go get the first record
-            Parent savedObj = (from d in db.Parents where d.ParentID == 1 select d).Single();
+            Family savedObj = (from d in db.Familys where d.FamilyID == 1 select d).Single();
 
             // assert
-            Assert.AreEqual(savedObj.ParentID, 1);
+            Assert.AreEqual(savedObj.FamilyID, 1);
 
         }
 
@@ -44,28 +43,29 @@ namespace MvcFamilyPoints.Tests
         /// Test Method to Connect to the repository and add a record
         /// </summary>
         [TestMethod]
-        public void SaveNewParentToRepository()
+        public void SaveNewFamilyToRepository()
         {
             // arrange
-
             // note connection string is in app.config
             FamilyPointsContext db = new FamilyPointsContext();
-            Parent obj = new Parent();
-            obj.Name = "New Parent 1";
-            obj.Password = "pasword";
-            db.Parents.Add(obj);
+            Family obj = new Family();
+            obj.Name = "New Family 1";
+            obj.Children = (from d in db.Children select d).ToList();
+            obj.Parents = (from d in db.Parents select d).ToList();
+            db.Familys.Add(obj);
 
             // act
             db.SaveChanges();
 
             // Assert -- see if the record retreived from the database matches the one i just added
-            Parent savedObj = (from d in db.Parents where d.ParentID == obj.ParentID select d).Single();
+            Family savedObj = (from d in db.Familys where d.FamilyID == obj.FamilyID select d).Single();
 
             Assert.AreEqual(savedObj.Name, obj.Name);
-            Assert.AreEqual(savedObj.Password, obj.Password);
+            Assert.AreEqual(savedObj.Children, obj.Children);
+            Assert.AreEqual(savedObj.Parents, obj.Parents);
 
             // cleanup
-            db.Parents.Remove(savedObj);
+            db.Familys.Remove(savedObj);
             db.SaveChanges();
         }
 
@@ -73,32 +73,33 @@ namespace MvcFamilyPoints.Tests
         /// Test Method to Connect to the repository and update a record
         /// </summary>
         [TestMethod]
-        public void UpdateParentInRepository()
+        public void UpdateFamilyInRepository()
         {
             // arrange - Insert a record so that it can be updated.
             // note connection string is in app.config
             FamilyPointsContext db = new FamilyPointsContext();
-            Parent obj = new Parent();
-            obj.Name = "New Parent 2";
-            obj.Password = "pasword";
-            db.Parents.Add(obj);
+            Family obj = new Family();
+            obj.Name = "New Family 1";
+            obj.Children = (from d in db.Children select d).ToList();
+            obj.Parents = (from d in db.Parents select d).ToList();
+            db.Familys.Add(obj);
             db.SaveChanges();
            
 
             // act - retrieve the saved record and update it.
-            Parent savedObj = (from d in db.Parents where d.ParentID == obj.ParentID select d).Single();
-            savedObj.Name = "An updated Parent 2";
-            savedObj.Password = "pasword";
+            Family savedObj = (from d in db.Familys where d.FamilyID == obj.FamilyID select d).Single();
+            savedObj.Name = "An updated Family 2";
             db.SaveChanges();
            
             // Assert -- see if the record retreived from the database matches the one i just updated
-            Parent updatedObj = (from d in db.Parents where d.ParentID == obj.ParentID select d).Single();
+            Family updatedObj = (from d in db.Familys where d.FamilyID == obj.FamilyID select d).Single();
 
             Assert.AreEqual(updatedObj.Name, savedObj.Name);
-            Assert.AreEqual(updatedObj.Password, savedObj.Password);
+            Assert.AreEqual(savedObj.Children, obj.Children);
+            Assert.AreEqual(savedObj.Parents, obj.Parents);
 
             // cleanup
-            db.Parents.Remove(updatedObj);
+            db.Familys.Remove(updatedObj);
             db.SaveChanges();
         }
 
@@ -106,24 +107,25 @@ namespace MvcFamilyPoints.Tests
         /// Test Method to Connect to the repository and delete a record
         /// </summary>
         [TestMethod]
-        public void DeleteParentFromRepository()
+        public void DeleteFamilyFromRepository()
         {
             // arrange - Insert a record so that it can be updated.
             // note connection string is in app.config
             FamilyPointsContext db = new FamilyPointsContext();
-            Parent obj = new Parent();
-            obj.Name = "Delete this Parent";
-            obj.Password = "pasword";
-            db.Parents.Add(obj);
+            Family obj = new Family();
+            obj.Name = "Delete this Family";
+            obj.Children = (from d in db.Children select d).ToList();
+            obj.Parents = (from d in db.Parents select d).ToList();
+            db.Familys.Add(obj);
             db.SaveChanges();
 
             // act - retrieve the saved record and then remove it.
-            Parent savedObj = (from d in db.Parents where d.ParentID == obj.ParentID select d).Single();
-            db.Parents.Remove(savedObj);
+            Family savedObj = (from d in db.Familys where d.FamilyID == obj.FamilyID select d).Single();
+            db.Familys.Remove(savedObj);
             db.SaveChanges();
 
             // Assert -- see if the record deleted from the database exists
-            Parent removedObj = (from d in db.Parents where d.ParentID == savedObj.ParentID select d).FirstOrDefault();
+            Family removedObj = (from d in db.Familys where d.FamilyID == savedObj.FamilyID select d).FirstOrDefault();
             Assert.IsNull(removedObj);
 
         }
@@ -132,19 +134,20 @@ namespace MvcFamilyPoints.Tests
         /// Test Method to List the records in the repository.
         /// </summary>
         [TestMethod]
-        public void ListofParentsInRepository()
+        public void ListofFamilysInRepository()
         {
             // arrange - Add a record to be listed.
             // note connection string is in app.config
             FamilyPointsContext db = new FamilyPointsContext();
-            Parent obj = new Parent();
-            obj.Name = "Parent 1";
-            obj.Password = "pasword";
-            db.Parents.Add(obj);
+            Family obj = new Family();
+            obj.Name = "Family 1";
+            obj.Children = (from d in db.Children select d).ToList();
+            obj.Parents = (from d in db.Parents select d).ToList();
+            db.Familys.Add(obj);
             db.SaveChanges();
 
             // act - retrieve the saved records and put them in a list.
-            List<Parent> savedObjs = (from d in db.Parents select d).ToList();
+            List<Family> savedObjs = (from d in db.Familys select d).ToList();
 
             // Assert -- The list of saved objects should have a count greater than 0
             Assert.IsTrue(savedObjs.Count > 0);

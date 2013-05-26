@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MvcFamilyPoints.Domain;
+using FamilyPointsDomain;
 using System.Data;
 using System.Linq;
 using System.Collections.Generic;

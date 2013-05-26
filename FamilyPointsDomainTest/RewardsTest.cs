@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MvcFamilyPoints.Domain;
+using FamilyPointsDomain;
 using System.Data;
 using System.Linq;
 using System.Collections.Generic;
@@ -10,8 +10,9 @@ using System.Data.Entity;
 namespace MvcFamilyPoints.Tests
 {
     
+    
     [TestClass]
-    public class FamilysUnitTests
+    public class RewardsUnitTests
     {
         [ClassInitialize()]
         public static void DataLayerSetup(TestContext testContext)
@@ -24,7 +25,7 @@ namespace MvcFamilyPoints.Tests
         /// This should fail if you have an empty table
         /// </summary>
         [TestMethod]
-        public void FamilysRepositoryContainsData()
+        public void RewardsRepositoryContainsData()
         {
 
             // arrange 
@@ -32,10 +33,10 @@ namespace MvcFamilyPoints.Tests
             FamilyPointsContext db = new FamilyPointsContext();
 
             // act -- go get the first record
-            Family savedObj = (from d in db.Familys where d.FamilyID == 1 select d).Single();
+            Reward savedObj = (from d in db.Rewards where d.RewardID == 1 select d).Single();
 
             // assert
-            Assert.AreEqual(savedObj.FamilyID, 1);
+            Assert.AreEqual(savedObj.RewardID, 1);
 
         }
 
@@ -43,29 +44,28 @@ namespace MvcFamilyPoints.Tests
         /// Test Method to Connect to the repository and add a record
         /// </summary>
         [TestMethod]
-        public void SaveNewFamilyToRepository()
+        public void SaveNewRewardToRepository()
         {
             // arrange
+
             // note connection string is in app.config
             FamilyPointsContext db = new FamilyPointsContext();
-            Family obj = new Family();
-            obj.Name = "New Family 1";
-            obj.Children = (from d in db.Children select d).ToList();
-            obj.Parents = (from d in db.Parents select d).ToList();
-            db.Familys.Add(obj);
+            Reward obj = new Reward();
+            obj.Description = "New Reward 1";
+            obj.Points = 1;
+            db.Rewards.Add(obj);
 
             // act
             db.SaveChanges();
 
             // Assert -- see if the record retreived from the database matches the one i just added
-            Family savedObj = (from d in db.Familys where d.FamilyID == obj.FamilyID select d).Single();
+            Reward savedObj = (from d in db.Rewards where d.RewardID == obj.RewardID select d).Single();
 
-            Assert.AreEqual(savedObj.Name, obj.Name);
-            Assert.AreEqual(savedObj.Children, obj.Children);
-            Assert.AreEqual(savedObj.Parents, obj.Parents);
+            Assert.AreEqual(savedObj.Description, obj.Description);
+            Assert.AreEqual(savedObj.Points, obj.Points);
 
             // cleanup
-            db.Familys.Remove(savedObj);
+            db.Rewards.Remove(savedObj);
             db.SaveChanges();
         }
 
@@ -73,33 +73,32 @@ namespace MvcFamilyPoints.Tests
         /// Test Method to Connect to the repository and update a record
         /// </summary>
         [TestMethod]
-        public void UpdateFamilyInRepository()
+        public void UpdateRewardInRepository()
         {
             // arrange - Insert a record so that it can be updated.
             // note connection string is in app.config
             FamilyPointsContext db = new FamilyPointsContext();
-            Family obj = new Family();
-            obj.Name = "New Family 1";
-            obj.Children = (from d in db.Children select d).ToList();
-            obj.Parents = (from d in db.Parents select d).ToList();
-            db.Familys.Add(obj);
+            Reward obj = new Reward();
+            obj.Description = "New Reward 2";
+            obj.Points = 0;
+            db.Rewards.Add(obj);
             db.SaveChanges();
            
 
             // act - retrieve the saved record and update it.
-            Family savedObj = (from d in db.Familys where d.FamilyID == obj.FamilyID select d).Single();
-            savedObj.Name = "An updated Family 2";
+            Reward savedObj = (from d in db.Rewards where d.RewardID == obj.RewardID select d).Single();
+            savedObj.Description = "An updated Reward 2";
+            savedObj.Points = 2;
             db.SaveChanges();
            
             // Assert -- see if the record retreived from the database matches the one i just updated
-            Family updatedObj = (from d in db.Familys where d.FamilyID == obj.FamilyID select d).Single();
+            Reward updatedObj = (from d in db.Rewards where d.RewardID == obj.RewardID select d).Single();
 
-            Assert.AreEqual(updatedObj.Name, savedObj.Name);
-            Assert.AreEqual(savedObj.Children, obj.Children);
-            Assert.AreEqual(savedObj.Parents, obj.Parents);
+            Assert.AreEqual(updatedObj.Description, savedObj.Description);
+            Assert.AreEqual(updatedObj.Points, savedObj.Points);
 
             // cleanup
-            db.Familys.Remove(updatedObj);
+            db.Rewards.Remove(updatedObj);
             db.SaveChanges();
         }
 
@@ -107,25 +106,24 @@ namespace MvcFamilyPoints.Tests
         /// Test Method to Connect to the repository and delete a record
         /// </summary>
         [TestMethod]
-        public void DeleteFamilyFromRepository()
+        public void DeleteRewardFromRepository()
         {
             // arrange - Insert a record so that it can be updated.
             // note connection string is in app.config
             FamilyPointsContext db = new FamilyPointsContext();
-            Family obj = new Family();
-            obj.Name = "Delete this Family";
-            obj.Children = (from d in db.Children select d).ToList();
-            obj.Parents = (from d in db.Parents select d).ToList();
-            db.Familys.Add(obj);
+            Reward obj = new Reward();
+            obj.Description = "Delete this Reward";
+            obj.Points = 3;
+            db.Rewards.Add(obj);
             db.SaveChanges();
 
             // act - retrieve the saved record and then remove it.
-            Family savedObj = (from d in db.Familys where d.FamilyID == obj.FamilyID select d).Single();
-            db.Familys.Remove(savedObj);
+            Reward savedObj = (from d in db.Rewards where d.RewardID == obj.RewardID select d).Single();
+            db.Rewards.Remove(savedObj);
             db.SaveChanges();
 
             // Assert -- see if the record deleted from the database exists
-            Family removedObj = (from d in db.Familys where d.FamilyID == savedObj.FamilyID select d).FirstOrDefault();
+            Reward removedObj = (from d in db.Rewards where d.RewardID == savedObj.RewardID select d).FirstOrDefault();
             Assert.IsNull(removedObj);
 
         }
@@ -134,20 +132,19 @@ namespace MvcFamilyPoints.Tests
         /// Test Method to List the records in the repository.
         /// </summary>
         [TestMethod]
-        public void ListofFamilysInRepository()
+        public void ListofRewardsInRepository()
         {
             // arrange - Add a record to be listed.
             // note connection string is in app.config
             FamilyPointsContext db = new FamilyPointsContext();
-            Family obj = new Family();
-            obj.Name = "Family 1";
-            obj.Children = (from d in db.Children select d).ToList();
-            obj.Parents = (from d in db.Parents select d).ToList();
-            db.Familys.Add(obj);
+            Reward obj = new Reward();
+            obj.Description = "Reward 1";
+            obj.Points = 1;
+            db.Rewards.Add(obj);
             db.SaveChanges();
 
             // act - retrieve the saved records and put them in a list.
-            List<Family> savedObjs = (from d in db.Familys select d).ToList();
+            List<Reward> savedObjs = (from d in db.Rewards select d).ToList();
 
             // Assert -- The list of saved objects should have a count greater than 0
             Assert.IsTrue(savedObjs.Count > 0);

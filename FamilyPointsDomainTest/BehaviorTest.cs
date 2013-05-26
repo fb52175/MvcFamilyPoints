@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MvcFamilyPoints.Domain;
+using FamilyPointsDomain;
 using System.Data;
 using System.Linq;
 using System.Collections.Generic;
@@ -10,9 +10,8 @@ using System.Data.Entity;
 namespace MvcFamilyPoints.Tests
 {
     
-    
     [TestClass]
-    public class ChildrenUnitTests
+    public class BehaviorsUnitTests
     {
         [ClassInitialize()]
         public static void DataLayerSetup(TestContext testContext)
@@ -25,7 +24,7 @@ namespace MvcFamilyPoints.Tests
         /// This should fail if you have an empty table
         /// </summary>
         [TestMethod]
-        public void ChildrenRepositoryContainsData()
+        public void BehaviorsRepositoryContainsData()
         {
 
             // arrange 
@@ -33,10 +32,10 @@ namespace MvcFamilyPoints.Tests
             FamilyPointsContext db = new FamilyPointsContext();
 
             // act -- go get the first record
-            Child savedObj = (from d in db.Children where d.ChildID == 1 select d).Single();
+            Behavior savedObj = (from d in db.Behaviors where d.BehaviorID == 1 select d).Single();
 
             // assert
-            Assert.AreEqual(savedObj.ChildID, 1);
+            Assert.AreEqual(savedObj.BehaviorID, 1);
 
         }
 
@@ -44,28 +43,28 @@ namespace MvcFamilyPoints.Tests
         /// Test Method to Connect to the repository and add a record
         /// </summary>
         [TestMethod]
-        public void SaveNewChildToRepository()
+        public void SaveNewBehaviorToRepository()
         {
             // arrange
 
             // note connection string is in app.config
             FamilyPointsContext db = new FamilyPointsContext();
-            Child obj = new Child();
-            obj.Name = "New Child 1";
-            obj.Password = "pasword";
-            db.Children.Add(obj);
+            Behavior obj = new Behavior();
+            obj.Description = "New Behavior 1";
+            obj.Points = 1;
+            db.Behaviors.Add(obj);
 
             // act
             db.SaveChanges();
 
             // Assert -- see if the record retreived from the database matches the one i just added
-            Child savedObj = (from d in db.Children where d.ChildID == obj.ChildID select d).Single();
+            Behavior savedObj = (from d in db.Behaviors where d.BehaviorID == obj.BehaviorID select d).Single();
 
-            Assert.AreEqual(savedObj.Name, obj.Name);
-            Assert.AreEqual(savedObj.Password, obj.Password);
+            Assert.AreEqual(savedObj.Description, obj.Description);
+            Assert.AreEqual(savedObj.Points, obj.Points);
 
             // cleanup
-            db.Children.Remove(savedObj);
+            db.Behaviors.Remove(savedObj);
             db.SaveChanges();
         }
 
@@ -73,32 +72,32 @@ namespace MvcFamilyPoints.Tests
         /// Test Method to Connect to the repository and update a record
         /// </summary>
         [TestMethod]
-        public void UpdateChildInRepository()
+        public void UpdateBehaviorInRepository()
         {
             // arrange - Insert a record so that it can be updated.
             // note connection string is in app.config
             FamilyPointsContext db = new FamilyPointsContext();
-            Child obj = new Child();
-            obj.Name = "New Child 2";
-            obj.Password = "pasword";
-            db.Children.Add(obj);
+            Behavior obj = new Behavior();
+            obj.Description = "New Behavior 2";
+            obj.Points = 0;
+            db.Behaviors.Add(obj);
             db.SaveChanges();
            
 
             // act - retrieve the saved record and update it.
-            Child savedObj = (from d in db.Children where d.ChildID == obj.ChildID select d).Single();
-            savedObj.Name = "An updated Child 2";
-            savedObj.Password = "pasword";
+            Behavior savedObj = (from d in db.Behaviors where d.BehaviorID == obj.BehaviorID select d).Single();
+            savedObj.Description = "An updated Behavior 2";
+            savedObj.Points = 2;
             db.SaveChanges();
            
             // Assert -- see if the record retreived from the database matches the one i just updated
-            Child updatedObj = (from d in db.Children where d.ChildID == obj.ChildID select d).Single();
+            Behavior updatedObj = (from d in db.Behaviors where d.BehaviorID == obj.BehaviorID select d).Single();
 
-            Assert.AreEqual(updatedObj.Name, savedObj.Name);
-            Assert.AreEqual(updatedObj.Password, savedObj.Password);
+            Assert.AreEqual(updatedObj.Description, savedObj.Description);
+            Assert.AreEqual(updatedObj.Points, savedObj.Points);
 
             // cleanup
-            db.Children.Remove(updatedObj);
+            db.Behaviors.Remove(updatedObj);
             db.SaveChanges();
         }
 
@@ -106,24 +105,24 @@ namespace MvcFamilyPoints.Tests
         /// Test Method to Connect to the repository and delete a record
         /// </summary>
         [TestMethod]
-        public void DeleteChildFromRepository()
+        public void DeleteBehaviorFromRepository()
         {
             // arrange - Insert a record so that it can be updated.
             // note connection string is in app.config
             FamilyPointsContext db = new FamilyPointsContext();
-            Child obj = new Child();
-            obj.Name = "Delete this Child";
-            obj.Password = "pasword";
-            db.Children.Add(obj);
+            Behavior obj = new Behavior();
+            obj.Description = "Delete this Behavior";
+            obj.Points = 3;
+            db.Behaviors.Add(obj);
             db.SaveChanges();
 
             // act - retrieve the saved record and then remove it.
-            Child savedObj = (from d in db.Children where d.ChildID == obj.ChildID select d).Single();
-            db.Children.Remove(savedObj);
+            Behavior savedObj = (from d in db.Behaviors where d.BehaviorID == obj.BehaviorID select d).Single();
+            db.Behaviors.Remove(savedObj);
             db.SaveChanges();
 
             // Assert -- see if the record deleted from the database exists
-            Child removedObj = (from d in db.Children where d.ChildID == savedObj.ChildID select d).FirstOrDefault();
+            Behavior removedObj = (from d in db.Behaviors where d.BehaviorID == savedObj.BehaviorID select d).FirstOrDefault();
             Assert.IsNull(removedObj);
 
         }
@@ -132,19 +131,19 @@ namespace MvcFamilyPoints.Tests
         /// Test Method to List the records in the repository.
         /// </summary>
         [TestMethod]
-        public void ListofChildrenInRepository()
+        public void ListofBehaviorsInRepository()
         {
             // arrange - Add a record to be listed.
             // note connection string is in app.config
             FamilyPointsContext db = new FamilyPointsContext();
-            Child obj = new Child();
-            obj.Name = "Child 1";
-            obj.Password = "pasword";
-            db.Children.Add(obj);
+            Behavior obj = new Behavior();
+            obj.Description = "Behavior 1";
+            obj.Points = 1;
+            db.Behaviors.Add(obj);
             db.SaveChanges();
 
             // act - retrieve the saved records and put them in a list.
-            List<Child> savedObjs = (from d in db.Children select d).ToList();
+            List<Behavior> savedObjs = (from d in db.Behaviors select d).ToList();
 
             // Assert -- The list of saved objects should have a count greater than 0
             Assert.IsTrue(savedObjs.Count > 0);

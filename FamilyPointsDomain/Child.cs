@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MvcFamilyPoints.Domain
+namespace FamilyPointsDomain
 {
-    public class Parent
+    public class Child
     {
-        public int ParentID { get; set; }
+        public int ChildID { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
     }
