@@ -11,7 +11,10 @@ namespace MvcFamilyPoints.Tests
 {
     public class FamilyPointsContextInitializer : DropCreateDatabaseAlways<FamilyPointsContext>
     {
-
+        /// <summary>
+        /// Seed the database with records for each domain object.
+        /// Some of the unit tests will use these objects
+        /// </summary>
         protected override void Seed(FamilyPointsContext context)
         {
             var rewards = new List<Reward> { new Reward()
