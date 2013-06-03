@@ -14,6 +14,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyPointsDomain", "Famil
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyPointsDomainTest", "FamilyPointsDomainTest\FamilyPointsDomainTest.csproj", "{ED25098A-DFC9-4492-86D5-DDDE172D94E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyPointsService", "FamilyPointsService\FamilyPointsService.csproj", "{CDDA9628-A6D5-41B5-92A1-47898005A924}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyPointsServiceTest", "FamilyPointsServicesTest\FamilyPointsServiceTest.csproj", "{A80028A4-8397-4C5B-8E7E-3736A9258BB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +40,14 @@ Global
 		{ED25098A-DFC9-4492-86D5-DDDE172D94E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED25098A-DFC9-4492-86D5-DDDE172D94E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED25098A-DFC9-4492-86D5-DDDE172D94E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDDA9628-A6D5-41B5-92A1-47898005A924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDDA9628-A6D5-41B5-92A1-47898005A924}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDDA9628-A6D5-41B5-92A1-47898005A924}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDDA9628-A6D5-41B5-92A1-47898005A924}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A80028A4-8397-4C5B-8E7E-3736A9258BB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A80028A4-8397-4C5B-8E7E-3736A9258BB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A80028A4-8397-4C5B-8E7E-3736A9258BB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A80028A4-8397-4C5B-8E7E-3736A9258BB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

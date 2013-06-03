@@ -13,5 +13,6 @@ It will also seed the database with objects for testing.
 Each domain class had a test file, that tests inserting, updating and deleting an object.  It also test generating a list of objects.
 There is one controller and view which demonstrates add/edit/delete a reward record.  You can access the view by running the project.
 
-              
+Week 4 - Added repositories and their interfaces to the FamilyPointService layer.  Created a RepositoryFactory class which creates or returns the repositories.
+Added a unit test to test the RewardsRepository add/update/delete and list functions.  Updated the Home Controller to use the Repository Factory.                
 

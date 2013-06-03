@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 
 
-namespace MvcFamilyPoints.Tests
+namespace FamilyPointsServiceTests
 {
     public class FamilyPointsContextInitializer : DropCreateDatabaseAlways<FamilyPointsContext>
     {

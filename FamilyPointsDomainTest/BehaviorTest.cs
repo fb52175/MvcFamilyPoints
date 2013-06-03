@@ -1,4 +1,5 @@
 ﻿using System;
+using FamilyPointsService;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FamilyPointsDomain;
 using System.Data;

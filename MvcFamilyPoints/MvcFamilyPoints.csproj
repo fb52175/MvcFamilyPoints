@@ -167,6 +167,10 @@
       <Project>{6659dbee-4b32-423f-bcef-703ef8c1c4be}</Project>
       <Name>FamilyPointsDomain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FamilyPointsService\FamilyPointsService.csproj">
+      <Project>{cdda9628-a6d5-41b5-92a1-47898005a924}</Project>
+      <Name>FamilyPointsService</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

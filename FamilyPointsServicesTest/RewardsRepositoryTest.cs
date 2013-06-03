@@ -6,12 +6,12 @@ using System.Data.Entity;
 using System.Linq;
 
 
-namespace MvcFamilyPoints.Tests
+namespace FamilyPointsServiceTests
 {
     
     
     [TestClass]
-    public class RewardsUnitTests
+    public class RewardsRepositoryUnitTests
     {
         [ClassInitialize()]
         public static void DataLayerSetup(TestContext testContext)
@@ -19,20 +19,22 @@ namespace MvcFamilyPoints.Tests
             Database.SetInitializer<FamilyPointsContext>(new FamilyPointsContextInitializer());
         }
 
+
         /// <summary>
         /// Test Method to Connect to the repository and see if there are any records.
         /// This should fail if you have an empty table
         /// </summary>
         [TestMethod]
-        public void RewardsRepositoryContainsData()
+        public void RewardsRepositoryFromFactoryContainsData()
         {
 
             // arrange 
             // note connection string is in app.config
-            FamilyPointsContext db = new FamilyPointsContext();
+            RepositoryFactory factory = new RepositoryFactory();
+            IRewardRepository repository = factory.RewardRepository;
 
             // act -- go get the first record
-            Reward savedObj = (from d in db.Rewards where d.RewardID == 1 select d).Single();
+            Reward savedObj = repository.GetById(1);
 
             // assert
             Assert.AreEqual(savedObj.RewardID, 1);
@@ -43,89 +45,93 @@ namespace MvcFamilyPoints.Tests
         /// Test Method to Connect to the repository and add a record
         /// </summary>
         [TestMethod]
-        public void SaveNewRewardToRepository()
+        public void SaveNewRewardToRepositoryFromFactory()
         {
             // arrange
 
-            // note connection string is in app.config
-            FamilyPointsContext db = new FamilyPointsContext();
-
+            // note connection string is in app.config  
+            RepositoryFactory factory = new RepositoryFactory();
+            IRewardRepository repository = factory.RewardRepository;
 
             Reward obj = new Reward();
             obj.Description = "New Reward 1";
             obj.Points = 1;
-            db.Rewards.Add(obj);
+            repository.Insert(obj);
 
             // act
-            db.SaveChanges();
+            repository.Save();
 
             // Assert -- see if the record retreived from the database matches the one i just added
-            Reward savedObj = (from d in db.Rewards where d.RewardID == obj.RewardID select d).Single();
+            Reward savedObj = repository.GetById(obj.RewardID);
 
             Assert.AreEqual(savedObj.Description, obj.Description);
             Assert.AreEqual(savedObj.Points, obj.Points);
 
             // cleanup
-            db.Rewards.Remove(savedObj);
-            db.SaveChanges();
-            
+            repository.Delete(savedObj);
+            repository.Save();
         }
 
         /// <summary>
         /// Test Method to Connect to the repository and update a record
         /// </summary>
         [TestMethod]
-        public void UpdateRewardInRepository()
+        public void UpdateRewardInRepositoryFromFactory()
         {
             // arrange - Insert a record so that it can be updated.
             // note connection string is in app.config
-            FamilyPointsContext db = new FamilyPointsContext();
+            RepositoryFactory factory = new RepositoryFactory();
+            IRewardRepository repository = factory.RewardRepository;
+
             Reward obj = new Reward();
             obj.Description = "New Reward 2";
             obj.Points = 0;
-            db.Rewards.Add(obj);
-            db.SaveChanges();
+            repository.Insert(obj);
+            repository.Save();
            
 
             // act - retrieve the saved record and update it.
-            Reward savedObj = (from d in db.Rewards where d.RewardID == obj.RewardID select d).Single();
+            Reward savedObj = repository.GetById(obj.RewardID);
             savedObj.Description = "An updated Reward 2";
             savedObj.Points = 2;
-            db.SaveChanges();
+            repository.Update(savedObj);
+            //repository.Save();
            
             // Assert -- see if the record retreived from the database matches the one i just updated
-            Reward updatedObj = (from d in db.Rewards where d.RewardID == obj.RewardID select d).Single();
+            Reward updatedObj = repository.GetById(obj.RewardID);
 
             Assert.AreEqual(updatedObj.Description, savedObj.Description);
             Assert.AreEqual(updatedObj.Points, savedObj.Points);
 
             // cleanup
-            db.Rewards.Remove(updatedObj);
-            db.SaveChanges();
+            repository.Delete(updatedObj);
+            repository.Save();
         }
 
         /// <summary>
         /// Test Method to Connect to the repository and delete a record
         /// </summary>
         [TestMethod]
-        public void DeleteRewardFromRepository()
+        public void DeleteRewardFromRepositoryFromFactory()
         {
             // arrange - Insert a record so that it can be updated.
             // note connection string is in app.config
-            FamilyPointsContext db = new FamilyPointsContext();
+            RepositoryFactory factory = new RepositoryFactory();
+            IRewardRepository repository = factory.RewardRepository;
+
             Reward obj = new Reward();
             obj.Description = "Delete this Reward";
             obj.Points = 3;
-            db.Rewards.Add(obj);
-            db.SaveChanges();
+            repository.Insert(obj);
+            repository.Save();
 
             // act - retrieve the saved record and then remove it.
-            Reward savedObj = (from d in db.Rewards where d.RewardID == obj.RewardID select d).Single();
-            db.Rewards.Remove(savedObj);
-            db.SaveChanges();
+            Reward savedObj = repository.GetById(obj.RewardID);
+            repository.Delete(savedObj);
+            repository.Save();
 
             // Assert -- see if the record deleted from the database exists
-            Reward removedObj = (from d in db.Rewards where d.RewardID == savedObj.RewardID select d).FirstOrDefault();
+            Reward removedObj = repository.GetById(obj.RewardID);
             Assert.IsNull(removedObj);
 
         }
@@ -134,19 +140,21 @@ namespace MvcFamilyPoints.Tests
         /// Test Method to List the records in the repository.
         /// </summary>
         [TestMethod]
-        public void ListofRewardsInRepository()
+        public void ListofRewardsInRepositoryFromFactory()
         {
             // arrange - Add a record to be listed.
             // note connection string is in app.config
-            FamilyPointsContext db = new FamilyPointsContext();
+            RepositoryFactory factory = new RepositoryFactory();
+            IRewardRepository repository = factory.RewardRepository;
+
             Reward obj = new Reward();
             obj.Description = "Reward 1";
             obj.Points = 1;
-            db.Rewards.Add(obj);
-            db.SaveChanges();
+            repository.Insert(obj);
+            repository.Save();
 
             // act - retrieve the saved records and put them in a list.
-            List<Reward> savedObjs = (from d in db.Rewards select d).ToList();
+            List<Reward> savedObjs = new List<Reward>(repository.GetRewards());
 
             // Assert -- The list of saved objects should have a count greater than 0
             Assert.IsTrue(savedObjs.Count > 0);

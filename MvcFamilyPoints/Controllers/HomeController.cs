@@ -6,19 +6,22 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FamilyPointsDomain;
+using FamilyPointsService;
 
 namespace MvcFamilyPoints.Controllers
 {
     public class HomeController : Controller
     {
-        private FamilyPointsContext db = new FamilyPointsContext();
+        //private FamilyPointsContext db = new FamilyPointsContext();
+        RepositoryFactory factory = new RepositoryFactory();
 
         //
         // GET: /Home/
 
         public ActionResult Index()
         {
-            return View(db.Rewards.ToList());
+
+            return View(factory.RewardRepository.GetRewards());
         }
 
         //
@@ -26,7 +29,7 @@ namespace MvcFamilyPoints.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Reward reward = db.Rewards.Find(id);
+            Reward reward = factory.RewardRepository.GetById(id);
             if (reward == null)
             {
                 return HttpNotFound();
@@ -51,8 +54,8 @@ namespace MvcFamilyPoints.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Rewards.Add(reward);
-                db.SaveChanges();
+                factory.RewardRepository.Insert(reward);
+                factory.RewardRepository.Save();
                 return RedirectToAction("Index");
             }
 
@@ -64,7 +67,7 @@ namespace MvcFamilyPoints.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Reward reward = db.Rewards.Find(id);
+            Reward reward = factory.RewardRepository.GetById(id);
             if (reward == null)
             {
                 return HttpNotFound();
@@ -81,8 +84,8 @@ namespace MvcFamilyPoints.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(reward).State = EntityState.Modified;
-                db.SaveChanges();
+                factory.RewardRepository.Update(reward);
+                factory.RewardRepository.Save();
                 return RedirectToAction("Index");
             }
             return View(reward);
@@ -93,7 +96,7 @@ namespace MvcFamilyPoints.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            Reward reward = db.Rewards.Find(id);
+            Reward reward = factory.RewardRepository.GetById(id);
             if (reward == null)
             {
                 return HttpNotFound();
@@ -108,15 +111,15 @@ namespace MvcFamilyPoints.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Reward reward = db.Rewards.Find(id);
-            db.Rewards.Remove(reward);
-            db.SaveChanges();
+            Reward reward = factory.RewardRepository.GetById(id);
+            factory.RewardRepository.Delete(reward);
+            factory.RewardRepository.Save();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
+            factory.RewardRepository.Dispose();
             base.Dispose(disposing);
         }
     }
