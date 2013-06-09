@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A80028A4-8397-4C5B-8E7E-3736A9258BB7}</ProjectGuid>
+    <ProjectGuid>{ED25098A-DFC9-4492-86D5-DDDE172D94E3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FamilyPoints.ServicesTest</RootNamespace>
-    <AssemblyName>FamilyPoints.ServicesTest</AssemblyName>
+    <RootNamespace>FamilyPointsDomainTest</RootNamespace>
+    <AssemblyName>FamilyPointsDomainTest</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -40,7 +40,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -55,16 +54,21 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="BehaviorTest.cs" />
+    <Compile Include="ChildTest.cs" />
     <Compile Include="FamilyPointsContextInitializer.cs" />
+    <Compile Include="FamilyTest.cs" />
+    <Compile Include="ParentTest.cs" />
+    <Compile Include="RewardsTest.cs" />
+    <Compile Include="TransactionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RewardsRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FamilyPointsDomain\FamilyPoints.Domain.csproj">
+    <ProjectReference Include="..\FamilyPoints.Domain\FamilyPoints.Domain.csproj">
       <Project>{6659dbee-4b32-423f-bcef-703ef8c1c4be}</Project>
       <Name>FamilyPoints.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FamilyPointsService\FamilyPoints.Service.csproj">
+    <ProjectReference Include="..\FamilyPoints.Service\FamilyPoints.Service.csproj">
       <Project>{cdda9628-a6d5-41b5-92a1-47898005a924}</Project>
       <Name>FamilyPoints.Service</Name>
     </ProjectReference>

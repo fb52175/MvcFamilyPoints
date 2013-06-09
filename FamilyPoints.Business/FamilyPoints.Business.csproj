@@ -7,8 +7,8 @@
     <ProjectGuid>{0EF5C12C-77E0-4111-98EA-280B317B2EA9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FamilyPointsBusiness</RootNamespace>
-    <AssemblyName>FamilyPointsBusiness</AssemblyName>
+    <RootNamespace>FamilyPoints.Business</RootNamespace>
+    <AssemblyName>FamilyPoints.Business</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
