@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using FamilyPointsDomain;
+using FamilyPoints.Domain;
 
-namespace FamilyPointsService
+namespace FamilyPoints.Service
 {
-    public interface IBehaviorRepository
+    public interface IBehaviorSvc
     {
         IEnumerable<Behavior> GetBehaviors();
         Behavior GetById(int id);

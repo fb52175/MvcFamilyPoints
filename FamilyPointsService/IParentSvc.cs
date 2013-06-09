@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using FamilyPointsDomain;
+using FamilyPoints.Domain;
 
-namespace FamilyPointsService
+namespace FamilyPoints.Service
 {
-    public interface IParentRepository
+    public interface IParentSvc
     {
         IEnumerable<Parent> GetParents();
         Parent GetById(int id);

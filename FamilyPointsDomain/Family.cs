@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace FamilyPointsDomain
+namespace FamilyPoints.Domain
 {
     public class Family
     {

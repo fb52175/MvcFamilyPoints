@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FamilyPointsDomain;
+using FamilyPoints.Domain;
 
-namespace FamilyPointsService
+namespace FamilyPoints.Service
 {
-    class RewardRepositoryImpl : IRewardRepository
+    class RewardSvcImpl : IRewardSvc
     {
         private FamilyPointsContext context;
 
-        public RewardRepositoryImpl(FamilyPointsContext context)
+        public RewardSvcImpl(FamilyPointsContext dbcontext)
         {
-            this.context = context;
+            if (context == null)
+                dbcontext = new FamilyPointsContext();
+            this.context = dbcontext;
+            if (context == null) throw new NullReferenceException("dbContext");
         }
 
         public IEnumerable<Reward> GetRewards()

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using FamilyPointsDomain;
+using FamilyPoints.Domain;
 
-namespace FamilyPointsService
+namespace FamilyPoints.Service
 {
-    public interface IRewardRepository
+    public interface IRewardSvc : IService
     {
         IEnumerable<Reward> GetRewards();
         Reward GetById(int id);

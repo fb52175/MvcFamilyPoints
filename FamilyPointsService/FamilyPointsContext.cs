@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
-using FamilyPointsDomain;
+using FamilyPoints.Domain;
 
-namespace FamilyPointsService
+namespace FamilyPoints.Service
 {
     public class FamilyPointsContext : DbContext
     {

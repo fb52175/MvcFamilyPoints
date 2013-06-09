@@ -4,17 +4,20 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FamilyPointsDomain;
+using FamilyPoints.Domain;
 
-namespace FamilyPointsService
+namespace FamilyPoints.Service
 {
-    class FamilyRepository : IFamilyRepository
+    class FamilySvcImpl : IFamilySvc
     {
         private FamilyPointsContext context;
 
-        public FamilyRepository(FamilyPointsContext context)
+        public FamilySvcImpl(FamilyPointsContext dbcontext)
         {
-            this.context = context;
+            if (context == null)
+                dbcontext = new FamilyPointsContext();
+            this.context = dbcontext;
+            if (context == null) throw new NullReferenceException("dbContext");
         }
 
         public IEnumerable<Family> GetFamilies()

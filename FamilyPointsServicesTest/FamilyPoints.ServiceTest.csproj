@@ -6,8 +6,8 @@
     <ProjectGuid>{A80028A4-8397-4C5B-8E7E-3736A9258BB7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FamilyPointsServicesTest</RootNamespace>
-    <AssemblyName>FamilyPointsServicesTest</AssemblyName>
+    <RootNamespace>FamilyPoints.ServicesTest</RootNamespace>
+    <AssemblyName>FamilyPoints.ServicesTest</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -60,13 +60,13 @@
     <Compile Include="RewardsRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FamilyPointsDomain\FamilyPointsDomain.csproj">
+    <ProjectReference Include="..\FamilyPointsDomain\FamilyPoints.Domain.csproj">
       <Project>{6659dbee-4b32-423f-bcef-703ef8c1c4be}</Project>
-      <Name>FamilyPointsDomain</Name>
+      <Name>FamilyPoints.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FamilyPointsService\FamilyPointsService.csproj">
+    <ProjectReference Include="..\FamilyPointsService\FamilyPoints.Service.csproj">
       <Project>{cdda9628-a6d5-41b5-92a1-47898005a924}</Project>
-      <Name>FamilyPointsService</Name>
+      <Name>FamilyPoints.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

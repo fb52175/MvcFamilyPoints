@@ -64,13 +64,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FamilyPointsDomain\FamilyPointsDomain.csproj">
+    <ProjectReference Include="..\FamilyPointsDomain\FamilyPoints.Domain.csproj">
       <Project>{6659dbee-4b32-423f-bcef-703ef8c1c4be}</Project>
-      <Name>FamilyPointsDomain</Name>
+      <Name>FamilyPoints.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FamilyPointsService\FamilyPointsService.csproj">
+    <ProjectReference Include="..\FamilyPointsService\FamilyPoints.Service.csproj">
       <Project>{cdda9628-a6d5-41b5-92a1-47898005a924}</Project>
-      <Name>FamilyPointsService</Name>
+      <Name>FamilyPoints.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

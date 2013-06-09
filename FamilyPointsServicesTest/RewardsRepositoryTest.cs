@@ -1,12 +1,12 @@
-﻿using FamilyPointsDomain;
-using FamilyPointsService;
+﻿using FamilyPoints.Domain;
+using FamilyPoints.Service;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
 
-namespace FamilyPointsServiceTests
+namespace FamilyPoints.ServiceTests
 {
     
     
@@ -30,8 +30,9 @@ namespace FamilyPointsServiceTests
 
             // arrange 
             // note connection string is in app.config
-            RepositoryFactory factory = new RepositoryFactory();
-            IRewardRepository repository = factory.RewardRepository;
+            Factory factory = Factory.GetInstance();
+            IRewardSvc repository =(IRewardSvc)factory.GetService("IRewardSvc");
+
 
             // act -- go get the first record
             Reward savedObj = repository.GetById(1);
@@ -50,8 +51,8 @@ namespace FamilyPointsServiceTests
             // arrange
 
             // note connection string is in app.config  
-            RepositoryFactory factory = new RepositoryFactory();
-            IRewardRepository repository = factory.RewardRepository;
+            Factory factory = Factory.GetInstance();
+            IRewardSvc repository = (IRewardSvc)factory.GetService("IRewardSvc");
 
             Reward obj = new Reward();
             obj.Description = "New Reward 1";
@@ -80,8 +81,8 @@ namespace FamilyPointsServiceTests
         {
             // arrange - Insert a record so that it can be updated.
             // note connection string is in app.config
-            RepositoryFactory factory = new RepositoryFactory();
-            IRewardRepository repository = factory.RewardRepository;
+            Factory factory = Factory.GetInstance();
+            IRewardSvc repository = (IRewardSvc)factory.GetService("IRewardSvc");
 
             Reward obj = new Reward();
             obj.Description = "New Reward 2";
@@ -116,8 +117,8 @@ namespace FamilyPointsServiceTests
         {
             // arrange - Insert a record so that it can be updated.
             // note connection string is in app.config
-            RepositoryFactory factory = new RepositoryFactory();
-            IRewardRepository repository = factory.RewardRepository;
+            Factory factory = Factory.GetInstance();
+            IRewardSvc repository = (IRewardSvc)factory.GetService("IRewardSvc");
 
             Reward obj = new Reward();
             obj.Description = "Delete this Reward";
@@ -144,8 +145,8 @@ namespace FamilyPointsServiceTests
         {
             // arrange - Add a record to be listed.
             // note connection string is in app.config
-            RepositoryFactory factory = new RepositoryFactory();
-            IRewardRepository repository = factory.RewardRepository;
+            Factory factory = Factory.GetInstance();
+            IRewardSvc repository = (IRewardSvc)factory.GetService("IRewardSvc");
 
             Reward obj = new Reward();
             obj.Description = "Reward 1";

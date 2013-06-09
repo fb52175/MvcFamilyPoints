@@ -1,14 +1,14 @@
 ﻿using System;
-using FamilyPointsService;
+using FamilyPoints.Service;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FamilyPointsDomain;
+using FamilyPoints.Domain;
 using System.Data;
 using System.Linq;
 using System.Collections.Generic;
 using System.Data.Entity;
 
 
-namespace FamilyPointsServiceTests
+namespace FamilyPoints.ServiceTests
 {
     public class FamilyPointsContextInitializer : DropCreateDatabaseAlways<FamilyPointsContext>
     {

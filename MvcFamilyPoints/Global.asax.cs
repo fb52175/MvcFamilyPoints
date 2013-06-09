@@ -6,8 +6,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Data.Entity;
-using FamilyPointsDomain;
-using FamilyPointsService;
+using FamilyPoints.Domain;
+using FamilyPoints.Service;
 
 namespace MvcFamilyPoints
 {

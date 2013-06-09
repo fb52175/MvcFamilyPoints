@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using FamilyPointsDomain;
+using FamilyPoints.Domain;
 
-namespace FamilyPointsService
+namespace FamilyPoints.Service
 {
-    public interface ITransactionRepository
+    public interface ITransactionSvc
     {
         IEnumerable<Transaction> GetTransactions();
         Transaction GetById(int id);
