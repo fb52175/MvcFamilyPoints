@@ -54,7 +54,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BehaviorMgrTest.cs" />
-    <Compile Include="FamilyMgrTest.cs" />
     <Compile Include="FamilyPointsContextInitializer.cs" />
     <Compile Include="ParentMgrTest.cs" />
     <Compile Include="ChildMgrTest.cs" />
