@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A80028A4-8397-4C5B-8E7E-3736A9258BB7}</ProjectGuid>
+    <ProjectGuid>{65975CE0-3898-4F37-A50A-C5DA870A0779}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FamilyPoints.ServicesTest</RootNamespace>
-    <AssemblyName>FamilyPoints.ServicesTest</AssemblyName>
+    <RootNamespace>FamilyPoints.BusinessTest</RootNamespace>
+    <AssemblyName>FamilyPoints.BusinessTest</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -39,8 +39,6 @@
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Microsoft ASP.NET\ASP.NET MVC 4\Packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -55,12 +53,19 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="FamilySvcTest.cs" />
+    <Compile Include="BehaviorMgrTest.cs" />
+    <Compile Include="FamilyMgrTest.cs" />
     <Compile Include="FamilyPointsContextInitializer.cs" />
+    <Compile Include="ParentMgrTest.cs" />
+    <Compile Include="ChildMgrTest.cs" />
+    <Compile Include="RewardMgrTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RewardsRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FamilyPoints.Business\FamilyPoints.Business.csproj">
+      <Project>{0ef5c12c-77e0-4111-98ea-280b317b2ea9}</Project>
+      <Name>FamilyPoints.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FamilyPoints.Domain\FamilyPoints.Domain.csproj">
       <Project>{6659dbee-4b32-423f-bcef-703ef8c1c4be}</Project>
       <Name>FamilyPoints.Domain</Name>
@@ -71,9 +76,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <None Include="App.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

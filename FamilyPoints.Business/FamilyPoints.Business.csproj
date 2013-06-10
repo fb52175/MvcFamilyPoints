@@ -39,8 +39,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="BehaviorMgr.cs" />
+    <Compile Include="ParentMgr.cs" />
+    <Compile Include="ChildMgr.cs" />
+    <Compile Include="RewardMgr.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FamilyPoints.Domain\FamilyPoints.Domain.csproj">
+      <Project>{6659dbee-4b32-423f-bcef-703ef8c1c4be}</Project>
+      <Name>FamilyPoints.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FamilyPoints.Service\FamilyPoints.Service.csproj">
+      <Project>{cdda9628-a6d5-41b5-92a1-47898005a924}</Project>
+      <Name>FamilyPoints.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

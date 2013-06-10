@@ -3,7 +3,7 @@ using FamilyPoints.Domain;
 
 namespace FamilyPoints.Service
 {
-    public interface IBehaviorSvc
+    public interface IBehaviorSvc : IService
     {
         IEnumerable<Behavior> GetBehaviors();
         Behavior GetById(int id);

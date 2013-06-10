@@ -3,7 +3,7 @@ using FamilyPoints.Domain;
 
 namespace FamilyPoints.Service
 {
-    public interface IFamilySvc
+    public interface IFamilySvc :IService
     {
         IEnumerable<Family> GetFamilies();
         Family GetById(int id);

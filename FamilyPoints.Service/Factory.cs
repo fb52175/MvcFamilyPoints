@@ -39,7 +39,6 @@ namespace FamilyPoints.Service
         private string GetImplName(string servicename)
         {
             NameValueCollection settings = ConfigurationManager.AppSettings;
-            var s = settings.Get(servicename);
             return settings.Get(servicename);
         }
     }

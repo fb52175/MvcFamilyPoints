@@ -11,7 +11,6 @@ using System.Data.Entity;
 namespace MvcFamilyPoints.Tests
 {
     
-    
     [TestClass]
     public class TransactionsUnitTests
     {
