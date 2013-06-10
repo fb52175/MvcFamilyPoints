@@ -16,3 +16,7 @@ There is one controller and view which demonstrates add/edit/delete a reward rec
 Week 4 - Added repositories and their interfaces to the FamilyPointService layer.  Created a RepositoryFactory class which creates or returns the repositories.
 Added a unit test to test the RewardsRepository add/update/delete and list functions.  Updated the Home Controller to use the Repository Factory.                
 
+Week 5 - Refactored the Repository Factory to be a decoupled factory.  
+Added Business Managers to and used the facade pattern to implements some of the use cases.
+I also renamed all the projects and namespaces to match the pattern application.layer, rather than applicationlayer.
+I am having issues with DBContext in my unit test on the Family Object.  I beleive this is because I am creating a new dbcontext each time I hit a repository.
