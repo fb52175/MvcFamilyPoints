@@ -28,11 +28,10 @@ namespace FamilyPoints.Business
             familySvc.Save();
         }
 
-        public void Update(Family family, string name)
+        public void Update(Family family)
         {
             Factory factory = Factory.GetInstance();
             IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc",context);
-            family.Name = name;
             familySvc.Update(family);
             familySvc.Save();
         }

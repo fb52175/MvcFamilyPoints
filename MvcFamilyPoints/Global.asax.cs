@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Data.Entity;
 using FamilyPoints.Domain;
+using FamilyPoints.Business;
 using FamilyPoints.Service;
 
 namespace MvcFamilyPoints

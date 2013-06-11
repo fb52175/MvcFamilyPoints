@@ -51,7 +51,9 @@ namespace FamilyPoints.BusinessTest
 
             // act - retrieve the saved record and update it.
             Reward savedObj = mgr.Find(obj.RewardID);
-            mgr.Update(savedObj, "An updated Reward 2",2);
+            savedObj.Description = "An updated Reward 2";
+            savedObj.Points = 2;
+            mgr.Update(savedObj);
 
             // Assert -- see if the record retreived from the database matches the one i just updated
             Reward updatedObj = mgr.Find(savedObj.RewardID);

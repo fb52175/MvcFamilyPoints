@@ -26,12 +26,10 @@ namespace FamilyPoints.Business
             behaviorSvc.Save();
         }
 
-        public void Update(Behavior behavior, string description, int points)
+        public void Update(Behavior behavior)
         {
             Factory factory = Factory.GetInstance();
             IBehaviorSvc behaviorSvc = (IBehaviorSvc)factory.GetService("IBehaviorSvc", context);
-            behavior.Description = description;
-            behavior.Points = points;
             behaviorSvc.Update(behavior);
             behaviorSvc.Save();
         }

@@ -27,12 +27,10 @@ namespace FamilyPoints.Business
             rewardSvc.Save();
         }
 
-        public void Update(Reward reward, string description, int points)
+        public void Update(Reward reward)
         {
             Factory factory = Factory.GetInstance();
             IRewardSvc rewardSvc = (IRewardSvc)factory.GetService("IRewardSvc", context);
-            reward.Description = description;
-            reward.Points = points;
             rewardSvc.Update(reward);
             rewardSvc.Save();
         }

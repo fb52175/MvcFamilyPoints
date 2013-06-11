@@ -50,7 +50,9 @@ namespace FamilyPoints.BusinessTest
 
             // act - retrieve the saved record and update it.
             Behavior savedObj = mgr.Find(obj.BehaviorID);
-            mgr.Update(savedObj, "An updated Behavior 2",2);
+            savedObj.Description = "An updated Behavior 2";
+            savedObj.Points = 2;
+            mgr.Update(savedObj);
 
             // Assert -- see if the record retreived from the database matches the one i just updated
             Behavior updatedObj = mgr.Find(savedObj.BehaviorID);

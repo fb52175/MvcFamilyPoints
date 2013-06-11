@@ -29,16 +29,10 @@ namespace FamilyPoints.Business
             transactionSvc.Save();
         }
 
-        public void Update(Transaction transaction, int parentId, int childId, string description, int points,string pointType)
+        public void Update(Transaction transaction)
         {
             Factory factory = Factory.GetInstance();
             ITransactionSvc transactionSvc = (ITransactionSvc)factory.GetService("ITransactionSvc", context);
-            transaction.Description = description;
-            transaction.Points = points;
-            transaction.ChildID = childId;
-            transaction.ParentID = parentId;
-            transaction.Date = DateTime.Now;
-            transaction.PointType = pointType;
             transactionSvc.Update(transaction);
             transactionSvc.Save();
         }

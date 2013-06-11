@@ -27,12 +27,10 @@ namespace FamilyPoints.Business
             childSvc.Save();
         }
 
-        public void Update(Child child, string name, string password)
+        public void Update(Child child)
         {
             Factory factory = Factory.GetInstance();
             IChildSvc childSvc = (IChildSvc)factory.GetService("IChildSvc", context);
-            child.Name = name;
-            child.Password = password;
             childSvc.Update(child);
             childSvc.Save();
         }

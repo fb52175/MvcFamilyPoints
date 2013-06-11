@@ -51,8 +51,10 @@ namespace FamilyPoints.BusinessTest
             mgr.Create(obj);
 
             // act - retrieve the saved record and update it.
-            Parent savedObj = mgr.Find(obj.ParentID);
-            mgr.Update(savedObj, "Joe","Password");
+            Parent savedObj = mgr.Find(obj.ParentID); 
+            savedObj.Name = "Joe";
+            savedObj.Password = "Password";
+            mgr.Update(savedObj);
 
             // Assert -- see if the record retreived from the database matches the one i just updated
             Parent updatedObj = mgr.Find(savedObj.ParentID);
