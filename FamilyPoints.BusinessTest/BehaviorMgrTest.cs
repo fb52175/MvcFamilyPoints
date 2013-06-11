@@ -16,8 +16,6 @@ namespace FamilyPoints.BusinessTest
         public void MgrInsertNewBehavior()
         {
             // arrange
-
-            // note connection string is in app.config
             BehaviorMgr mgr = new BehaviorMgr();
             Behavior obj = new Behavior();
             obj.Description = "New Behavior 1";
@@ -44,7 +42,6 @@ namespace FamilyPoints.BusinessTest
         public void MgrUpdateBehavior()
         {
             // arrange - Insert a record so that it can be updated.
-            // note connection string is in app.config
             BehaviorMgr mgr = new BehaviorMgr();
             Behavior obj = new Behavior();
             obj.Description = "New Behavior 2";
@@ -72,7 +69,6 @@ namespace FamilyPoints.BusinessTest
         public void MgrDeleteBehavior()
         {
             // arrange - Insert a record so that it can be updated.
-            // note connection string is in app.config
             BehaviorMgr mgr = new BehaviorMgr();
             Behavior obj = new Behavior();
             obj.Description = "Delete this Behavior";
@@ -96,7 +92,6 @@ namespace FamilyPoints.BusinessTest
         public void MgrGetBehaviors()
         {
             // arrange - Add a record to be listed.
-            // note connection string is in app.config
             BehaviorMgr mgr = new BehaviorMgr();
             Behavior obj = new Behavior();
             obj.Description = "Behavior 1";

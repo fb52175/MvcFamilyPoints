@@ -1,19 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FamilyPoints.Domain;
+﻿using FamilyPoints.Domain;
 using FamilyPoints.Service;
+using System.Collections.Generic;
 
 namespace FamilyPoints.Business
 {
     public class ParentMgr
     {
+        public FamilyPointsContext context;
+
+        public ParentMgr()
+        {
+            this.context=new FamilyPointsContext();
+        }
+
+        public ParentMgr(FamilyPointsContext dbContext)
+        {
+            this.context = dbContext;
+        }
+
         public void Create(Parent parent)
         {
             Factory factory = Factory.GetInstance();
-            IParentSvc parentSvc = (IParentSvc)factory.GetService("IParentSvc");
+            IParentSvc parentSvc = (IParentSvc)factory.GetService("IParentSvc", context);
 
             parentSvc.Insert(parent);
             parentSvc.Save();
@@ -22,7 +30,7 @@ namespace FamilyPoints.Business
         public void Update(Parent parent, string name, string password)
         {
             Factory factory = Factory.GetInstance();
-            IParentSvc parentSvc = (IParentSvc)factory.GetService("IParentSvc");
+            IParentSvc parentSvc = (IParentSvc)factory.GetService("IParentSvc", context);
             parent.Name = name;
             parent.Password = password;
             parentSvc.Update(parent);
@@ -32,7 +40,7 @@ namespace FamilyPoints.Business
         public void Delete(Parent parent)
         {
             Factory factory = Factory.GetInstance();
-            IParentSvc parentSvc = (IParentSvc)factory.GetService("IParentSvc");
+            IParentSvc parentSvc = (IParentSvc)factory.GetService("IParentSvc", context);
 
             parentSvc.Delete(parent);
             parentSvc.Save();
@@ -41,15 +49,15 @@ namespace FamilyPoints.Business
         public Parent Find(int id)
         {
             Factory factory = Factory.GetInstance();
-            IParentSvc parentSvc = (IParentSvc)factory.GetService("IParentSvc");
+            IParentSvc parentSvc = (IParentSvc)factory.GetService("IParentSvc", context);
             return parentSvc.GetById(id);
         }
 
         public IEnumerable<Parent> GetParents()
         {
             Factory factory = Factory.GetInstance();
-            IParentSvc parentSvc = (IParentSvc)factory.GetService("IParentSvc");
-            return parentSvc.GetParents();
+            IParentSvc parentSvc = (IParentSvc)factory.GetService("IParentSvc", context);
+            return parentSvc.GetAll();
         }
     }
 }

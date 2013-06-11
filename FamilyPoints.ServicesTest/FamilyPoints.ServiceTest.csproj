@@ -56,9 +56,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="FamilySvcTest.cs" />
-    <Compile Include="FamilyPointsContextInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RewardsRepositoryTest.cs" />
+    <Compile Include="RewardsSvcTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FamilyPoints.Domain\FamilyPoints.Domain.csproj">

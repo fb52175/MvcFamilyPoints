@@ -17,8 +17,6 @@ namespace FamilyPoints.BusinessTest
         public void MgrInsertNewParent()
         {
             // arrange
-
-            // note connection string is in app.config
             ParentMgr mgr = new ParentMgr();
 
             Parent obj = new Parent();
@@ -46,7 +44,6 @@ namespace FamilyPoints.BusinessTest
         public void MgrUpdateParent()
         {
             // arrange - Insert a record so that it can be updated.
-            // note connection string is in app.config
             ParentMgr mgr = new ParentMgr();
             Parent obj = new Parent();
             obj.Name = "John";
@@ -74,7 +71,6 @@ namespace FamilyPoints.BusinessTest
         public void MgrDeleteParent()
         {
             // arrange - Insert a record so that it can be updated.
-            // note connection string is in app.config
             ParentMgr mgr = new ParentMgr();
             Parent obj = new Parent();
             obj.Name = "Jane";

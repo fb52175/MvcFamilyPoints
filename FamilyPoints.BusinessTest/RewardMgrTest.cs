@@ -16,8 +16,6 @@ namespace FamilyPoints.BusinessTest
         public void MgrInsertNewReward()
         {
             // arrange
-
-            // note connection string is in app.config
             RewardMgr mgr = new RewardMgr();
 
             Reward obj = new Reward();
@@ -45,7 +43,6 @@ namespace FamilyPoints.BusinessTest
         public void MgrUpdateReward()
         {
             // arrange - Insert a record so that it can be updated.
-            // note connection string is in app.config
             RewardMgr mgr = new RewardMgr();
             Reward obj = new Reward();
             obj.Description = "New Reward 2";
@@ -73,7 +70,6 @@ namespace FamilyPoints.BusinessTest
         public void MgrDeleteReward()
         {
             // arrange - Insert a record so that it can be updated.
-            // note connection string is in app.config
             RewardMgr mgr = new RewardMgr();
             Reward obj = new Reward();
             obj.Description = "Delete this Reward";
@@ -97,7 +93,6 @@ namespace FamilyPoints.BusinessTest
         public void MgrGetRewards()
         {
             // arrange - Add a record to be listed.
-            // note connection string is in app.config
             RewardMgr mgr = new RewardMgr();
             Reward obj = new Reward();
             obj.Description = "Reward 1";

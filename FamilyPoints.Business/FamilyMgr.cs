@@ -1,19 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using FamilyPoints.Domain;
 using FamilyPoints.Service;
+using System.Collections.Generic;
 
 namespace FamilyPoints.Business
 {
     public class FamilyMgr
     {
+        public FamilyPointsContext context;
+
+        public FamilyMgr()
+        {
+            this.context=new FamilyPointsContext();
+        }
+
+        public FamilyMgr(FamilyPointsContext dbContext)
+        {
+            this.context = dbContext;
+        }
+
         public void Create(Family family)
         {
             Factory factory = Factory.GetInstance();
-            IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc");
+            IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc", context);
 
             familySvc.Insert(family);
             familySvc.Save();
@@ -22,7 +31,7 @@ namespace FamilyPoints.Business
         public void Update(Family family, string name)
         {
             Factory factory = Factory.GetInstance();
-            IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc");
+            IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc",context);
             family.Name = name;
             familySvc.Update(family);
             familySvc.Save();
@@ -31,7 +40,9 @@ namespace FamilyPoints.Business
         public void AddChild(Family family, Child child)
         {
             Factory factory = Factory.GetInstance();
-            IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc");
+            IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc",context);
+            if (family.Children == null)
+                family.Children = new Collection<Child>();
             family.Children.Add(child);
             familySvc.Update(family);
             familySvc.Save();
@@ -40,7 +51,9 @@ namespace FamilyPoints.Business
         public void AddParent(Family family, Parent parent)
         {
             Factory factory = Factory.GetInstance();
-            IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc");
+            IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc",context);
+            if(family.Parents == null)
+                family.Parents=new Collection<Parent>();
             family.Parents.Add(parent);
             familySvc.Update(family);
             familySvc.Save();
@@ -49,8 +62,7 @@ namespace FamilyPoints.Business
         public void Delete(Family family)
         {
             Factory factory = Factory.GetInstance();
-            IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc");
-
+            IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc",context);
             familySvc.Delete(family);
             familySvc.Save();
         }
@@ -58,17 +70,16 @@ namespace FamilyPoints.Business
         public Family Find(int id)
         {
             Factory factory = Factory.GetInstance();
-            IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc");
+            IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc", context);
             Family family = familySvc.GetById(id);
-            //familySvc.Dispose();
             return family;
         }
 
         public IEnumerable<Family> GetFamilies()
         {
             Factory factory = Factory.GetInstance();
-            IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc");
-            return familySvc.GetFamilies();
+            IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc",context);
+            return familySvc.GetAll();
         }
     }
 }

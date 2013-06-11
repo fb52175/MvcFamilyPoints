@@ -13,25 +13,19 @@ namespace FamilyPoints.ServiceTests
     [TestClass]
     public class FamilySvcUnitTests
     {
-        [ClassInitialize()]
-        public static void DataLayerSetup(TestContext testContext)
-        {
-            Database.SetInitializer<FamilyPointsContext>(new FamilyPointsContextInitializer());
-        }
-
 
         /// <summary>
-        /// Test Method to Connect to the repository and see if there are any records.
+        /// Test Method to Connect to the familySvc and see if there are any records.
         /// This should fail if you have an empty table
         /// </summary>
         [TestMethod]
-        public void FamilyRepositoryFromFactoryContainsData()
+        public void FamilySvcRepositoryContainsData()
         {
 
             // arrange 
-            // note connection string is in app.config
+            FamilyPointsContext db = new FamilyPointsContext();
             Factory factory = Factory.GetInstance();
-            IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc");
+            IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc",db);
 
 
             // act -- go get the first record
@@ -43,16 +37,15 @@ namespace FamilyPoints.ServiceTests
         }
 
         /// <summary>
-        /// Test Method to Connect to the repository and add a record
+        /// Test Method to Connect to the familySvc and add a record
         /// </summary>
         [TestMethod]
-        public void SaveNewFamilyToRepositoryFromFactory()
+        public void SaveNewFamilySvc()
         {
             // arrange
-
-            // note connection string is in app.config  
+            FamilyPointsContext db = new FamilyPointsContext();
             Factory factory = Factory.GetInstance();
-            IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc");
+            IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc",db);
 
             Family obj = new Family();
             obj.Name = "New Family 1";
@@ -71,93 +64,88 @@ namespace FamilyPoints.ServiceTests
             familySvc.Save();
         }
 
-        ///// <summary>
-        ///// Test Method to Connect to the repository and update a record
-        ///// </summary>
-        //[TestMethod]
-        //public void UpdateRewardInRepositoryFromFactory()
-        //{
-        //    // arrange - Insert a record so that it can be updated.
-        //    // note connection string is in app.config
-        //    Factory factory = Factory.GetInstance();
-        //    IRewardSvc repository = (IRewardSvc)factory.GetService("IRewardSvc");
+        /// <summary>
+        /// Test Method to Connect to the familySvc and update a record
+        /// </summary>
+        [TestMethod]
+        public void UpdateFamilySvc()
+        {
+            // arrange - Insert a record so that it can be updated.
+            FamilyPointsContext db = new FamilyPointsContext();
+            Factory factory = Factory.GetInstance();
+            IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc",db);
 
-        //    Reward obj = new Reward();
-        //    obj.Description = "New Reward 2";
-        //    obj.Points = 0;
-        //    repository.Insert(obj);
-        //    repository.Save();
-           
+            Family obj = new Family();
+            obj.Name = "New Family 2";
+            familySvc.Insert(obj);
+            familySvc.Save();
 
-        //    // act - retrieve the saved record and update it.
-        //    Reward savedObj = repository.GetById(obj.RewardID);
-        //    savedObj.Description = "An updated Reward 2";
-        //    savedObj.Points = 2;
-        //    repository.Update(savedObj);
-        //    //repository.Save();
-           
-        //    // Assert -- see if the record retreived from the database matches the one i just updated
-        //    Reward updatedObj = repository.GetById(obj.RewardID);
 
-        //    Assert.AreEqual(updatedObj.Description, savedObj.Description);
-        //    Assert.AreEqual(updatedObj.Points, savedObj.Points);
+            // act - retrieve the saved record and update it.
+            Family savedObj = familySvc.GetById(obj.FamilyID);
+            savedObj.Name = "An updated Family 2";
+            familySvc.Update(savedObj);
+            //familySvc.Save();
 
-        //    // cleanup
-        //    repository.Delete(updatedObj);
-        //    repository.Save();
-        //}
+            // Assert -- see if the record retreived from the database matches the one i just updated
+            Family updatedObj = familySvc.GetById(obj.FamilyID);
 
-        ///// <summary>
-        ///// Test Method to Connect to the repository and delete a record
-        ///// </summary>
-        //[TestMethod]
-        //public void DeleteRewardFromRepositoryFromFactory()
-        //{
-        //    // arrange - Insert a record so that it can be updated.
-        //    // note connection string is in app.config
-        //    Factory factory = Factory.GetInstance();
-        //    IRewardSvc repository = (IRewardSvc)factory.GetService("IRewardSvc");
+            Assert.AreEqual(updatedObj.Name, savedObj.Name);
 
-        //    Reward obj = new Reward();
-        //    obj.Description = "Delete this Reward";
-        //    obj.Points = 3;
-        //    repository.Insert(obj);
-        //    repository.Save();
+            // cleanup
+            familySvc.Delete(updatedObj);
+            familySvc.Save();
+        }
 
-        //    // act - retrieve the saved record and then remove it.
-        //    Reward savedObj = repository.GetById(obj.RewardID);
-        //    repository.Delete(savedObj);
-        //    repository.Save();
+        /// <summary>
+        /// Test Method to Connect to the familySvc and delete a record
+        /// </summary>
+        [TestMethod]
+        public void DeleteFamilySvc()
+        {
+            // arrange - Insert a record so that it can be updated.
+            FamilyPointsContext db = new FamilyPointsContext();
+            Factory factory = Factory.GetInstance();
+            IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc",db);
 
-        //    // Assert -- see if the record deleted from the database exists
-        //    Reward removedObj = repository.GetById(obj.RewardID);
-        //    Assert.IsNull(removedObj);
+            Family obj = new Family();
+            obj.Name = "Delete this Family";
+            familySvc.Insert(obj);
+            familySvc.Save();
 
-        //}
+            // act - retrieve the saved record and then remove it.
+            Family savedObj = familySvc.GetById(obj.FamilyID);
+            familySvc.Delete(savedObj);
+            familySvc.Save();
 
-        ///// <summary>
-        ///// Test Method to List the records in the repository.
-        ///// </summary>
-        //[TestMethod]
-        //public void ListofRewardsInRepositoryFromFactory()
-        //{
-        //    // arrange - Add a record to be listed.
-        //    // note connection string is in app.config
-        //    Factory factory = Factory.GetInstance();
-        //    IRewardSvc repository = (IRewardSvc)factory.GetService("IRewardSvc");
+            // Assert -- see if the record deleted from the database exists
+            Family removedObj = familySvc.GetById(obj.FamilyID);
+            Assert.IsNull(removedObj);
 
-        //    Reward obj = new Reward();
-        //    obj.Description = "Reward 1";
-        //    obj.Points = 1;
-        //    repository.Insert(obj);
-        //    repository.Save();
+        }
 
-        //    // act - retrieve the saved records and put them in a list.
-        //    List<Reward> savedObjs = new List<Reward>(repository.GetRewards());
+        /// <summary>
+        /// Test Method to List the records in the family repository.
+        /// </summary>
+        [TestMethod]
+        public void ListofFamilysInRepositoryFromFactory()
+        {
+            // arrange - Add a record to be listed.
+            FamilyPointsContext db = new FamilyPointsContext();
+            Factory factory = Factory.GetInstance();
+            IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc",db);
 
-        //    // Assert -- The list of saved objects should have a count greater than 0
-        //    Assert.IsTrue(savedObjs.Count > 0);
-        //}
+            Family obj = new Family();
+            obj.Name = "Family 1";
+            familySvc.Insert(obj);
+            familySvc.Save();
+
+            // act - retrieve the saved records and put them in a list.
+            List<Family> savedObjs = new List<Family>(familySvc.GetAll());
+
+            // Assert -- The list of saved objects should have a count greater than 0
+            Assert.IsTrue(savedObjs.Count > 0);
+        }
 
 
 

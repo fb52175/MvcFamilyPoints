@@ -1,23 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using FamilyPoints.BusinessTests;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FamilyPoints.Business;
+﻿using FamilyPoints.Business;
 using FamilyPoints.Domain;
-using FamilyPoints.Service;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace FamilyPoints.BusinessTest
 {
     [TestClass]
     public class FamilyMgrTests
     {
-        [ClassInitialize()]
-        public static void DataLayerSetup(TestContext testContext)
-        {
-            Database.SetInitializer<FamilyPointsContext>(new FamilyPointsContextInitializer());
-        }
-
+     
         /// <summary>
         /// Test inserting an object with the manager
         /// </summary>
@@ -25,7 +16,6 @@ namespace FamilyPoints.BusinessTest
         public void MgrInsertNewFamily()
         {
             // arrange
-
             FamilyMgr mgr = new FamilyMgr();
             Family obj = new Family();
             obj.Name = "Boland";
@@ -41,6 +31,7 @@ namespace FamilyPoints.BusinessTest
             // cleanup
 
             mgr.Delete(mgr.Find(obj.FamilyID));
+      
 
         }
 
@@ -51,7 +42,7 @@ namespace FamilyPoints.BusinessTest
         public void MgrUpdateFamily()
         {
             // arrange - Insert a record so that it can be updated.
-            // note connection string is in app.config
+
             FamilyMgr mgr = new FamilyMgr();
             Family obj = new Family();
             obj.Name = "Boland";
@@ -71,34 +62,79 @@ namespace FamilyPoints.BusinessTest
         }
 
         /// <summary>
-        /// Test Adding a Parent an object with the manager
+        /// Test Adding Parents to an object with the manager
         /// </summary>
         [TestMethod]
         public void MgrAddParentToFamily()
         {
             // arrange - Insert a record so that it can be updated.
-            // note connection string is in app.config
             FamilyMgr mgr = new FamilyMgr();
             Family obj = new Family();
             obj.Name = "Boland";
             mgr.Create(obj);
 
-            ParentMgr parentMgr = new ParentMgr();
+            ParentMgr parentMgr = new ParentMgr(mgr.context);
             Parent pObj = new Parent();
             pObj.Name = "John";
             pObj.Password = "password";
+            parentMgr.Create(pObj);
+
+            Parent pObj2 = new Parent();
+            pObj2.Name = "Jane";
+            pObj2.Password = "password";
+            parentMgr.Create(pObj2);
 
             // act - retrieve the saved record and update it.
             Family savedObj = mgr.Find(obj.FamilyID);
 
             mgr.AddParent(savedObj,pObj);
+            mgr.AddParent(savedObj, pObj2);
 
             // Assert -- see if the record retreived from the database matches the one i just updated
             Family updatedObj = mgr.Find(savedObj.FamilyID);
 
             Assert.AreEqual(updatedObj.Name, savedObj.Name);
             Assert.AreEqual(updatedObj.Parents, savedObj.Parents);
-            //List<Parent> parentObjs = new List<Parent>(updatedObj);
+
+            // cleanup
+            mgr.Delete(updatedObj);
+        }
+
+        /// <summary>
+        /// Test Adding Children to an object with the manager
+        /// </summary>
+        [TestMethod]
+        public void MgrAddChildrenToFamily()
+        {
+            // arrange - Insert a record so that it can be updated.
+            FamilyMgr mgr = new FamilyMgr();
+            Family obj = new Family();
+            obj.Name = "Boland";
+            mgr.Create(obj);
+
+            ChildMgr childMgr = new ChildMgr(mgr.context);
+            Child pObj = new Child();
+            pObj.Name = "Johnny";
+            pObj.Password = "password";
+            childMgr.Create(pObj);
+
+            Child pObj2 = new Child();
+            pObj2.Name = "Janis";
+            pObj2.Password = "password";
+            childMgr.Create(pObj2);
+
+            // act - retrieve the saved record and update it.
+            Family savedObj = mgr.Find(obj.FamilyID);
+
+            mgr.AddChild(savedObj, pObj);
+            mgr.AddChild(savedObj, pObj2);
+
+
+            // Assert -- see if the record retreived from the database matches the one i just updated
+            Family updatedObj = mgr.Find(savedObj.FamilyID);
+
+            Assert.AreEqual(updatedObj.Name, savedObj.Name);
+            Assert.AreEqual(updatedObj.Children, savedObj.Children);
 
 
             // cleanup
@@ -112,7 +148,6 @@ namespace FamilyPoints.BusinessTest
         public void MgrDeleteFamily()
         {
             // arrange - Insert a record so that it can be updated.
-            // note connection string is in app.config
             FamilyMgr mgr = new FamilyMgr();
             Family obj = new Family();
             obj.Name = "Boland";
@@ -135,7 +170,6 @@ namespace FamilyPoints.BusinessTest
         public void MgrGetFamilys()
         {
             // arrange - Add a record to be listed.
-            // note connection string is in app.config
             FamilyMgr mgr = new FamilyMgr();
             Family obj = new Family();
             obj.Name = "Boland";

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FamilyPoints.Domain;
-using System.Configuration;
 using System.Collections.Specialized;
+using System.Configuration;
 
 
 
@@ -16,16 +12,13 @@ namespace FamilyPoints.Service
         private static Factory factory = new Factory();
         public static Factory GetInstance() { return factory; }
 
-        public IService GetService(string serviceName)
+        public IService GetService(string serviceName,params object[] args)
         {
             Type type;
             Object obj = null;
             try
             {   
-                object args = null;
-                type = Type.GetType(GetImplName(serviceName));
-               //object repository = Activator.CreateInstance(Type.GetType(repositoryName), args);
-                
+                type = Type.GetType(GetImplName(serviceName));   
                 obj = Activator.CreateInstance(type,args);
             }
             catch (Exception e)

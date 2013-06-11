@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using FamilyPoints.Domain;
 using System.Data.Entity;
-using FamilyPoints.Domain;
 
 namespace FamilyPoints.Service
 {

@@ -11,31 +11,25 @@ namespace FamilyPoints.ServiceTests
     
     
     [TestClass]
-    public class RewardsRepositoryUnitTests
+    public class RewardSvcUnitTests
     {
-        [ClassInitialize()]
-        public static void DataLayerSetup(TestContext testContext)
-        {
-            Database.SetInitializer<FamilyPointsContext>(new FamilyPointsContextInitializer());
-        }
-
 
         /// <summary>
-        /// Test Method to Connect to the repository and see if there are any records.
+        /// Test Method to Connect to the svc and see if there are any records.
         /// This should fail if you have an empty table
         /// </summary>
         [TestMethod]
-        public void RewardsRepositoryFromFactoryContainsData()
+        public void RewardSvcRepositoryContainsData()
         {
 
             // arrange 
-            // note connection string is in app.config
+            FamilyPointsContext db = new FamilyPointsContext();
             Factory factory = Factory.GetInstance();
-            IRewardSvc repository =(IRewardSvc)factory.GetService("IRewardSvc");
+            IRewardSvc svc =(IRewardSvc)factory.GetService("IRewardSvc",db);
 
 
             // act -- go get the first record
-            Reward savedObj = repository.GetById(1);
+            Reward savedObj = svc.GetById(1);
 
             // assert
             Assert.AreEqual(savedObj.RewardID, 1);
@@ -43,119 +37,118 @@ namespace FamilyPoints.ServiceTests
         }
 
         /// <summary>
-        /// Test Method to Connect to the repository and add a record
+        /// Test Method to Connect to the svc and add a record
         /// </summary>
         [TestMethod]
-        public void SaveNewRewardToRepositoryFromFactory()
+        public void SaveNewRewardSvc()
         {
             // arrange
-
-            // note connection string is in app.config  
+            FamilyPointsContext db = new FamilyPointsContext();
             Factory factory = Factory.GetInstance();
-            IRewardSvc repository = (IRewardSvc)factory.GetService("IRewardSvc");
+            IRewardSvc svc = (IRewardSvc)factory.GetService("IRewardSvc",db);
 
             Reward obj = new Reward();
             obj.Description = "New Reward 1";
             obj.Points = 1;
-            repository.Insert(obj);
+            svc.Insert(obj);
 
             // act
-            repository.Save();
+            svc.Save();
 
             // Assert -- see if the record retreived from the database matches the one i just added
-            Reward savedObj = repository.GetById(obj.RewardID);
+            Reward savedObj = svc.GetById(obj.RewardID);
 
             Assert.AreEqual(savedObj.Description, obj.Description);
             Assert.AreEqual(savedObj.Points, obj.Points);
 
             // cleanup
-            repository.Delete(savedObj);
-            repository.Save();
+            svc.Delete(savedObj);
+            svc.Save();
         }
 
         /// <summary>
-        /// Test Method to Connect to the repository and update a record
+        /// Test Method to Connect to the svc and update a record
         /// </summary>
         [TestMethod]
-        public void UpdateRewardInRepositoryFromFactory()
+        public void UpdateRewardSvc()
         {
             // arrange - Insert a record so that it can be updated.
-            // note connection string is in app.config
+            FamilyPointsContext db = new FamilyPointsContext();
             Factory factory = Factory.GetInstance();
-            IRewardSvc repository = (IRewardSvc)factory.GetService("IRewardSvc");
+            IRewardSvc svc = (IRewardSvc)factory.GetService("IRewardSvc",db);
 
             Reward obj = new Reward();
             obj.Description = "New Reward 2";
             obj.Points = 0;
-            repository.Insert(obj);
-            repository.Save();
+            svc.Insert(obj);
+            svc.Save();
            
 
             // act - retrieve the saved record and update it.
-            Reward savedObj = repository.GetById(obj.RewardID);
+            Reward savedObj = svc.GetById(obj.RewardID);
             savedObj.Description = "An updated Reward 2";
             savedObj.Points = 2;
-            repository.Update(savedObj);
-            //repository.Save();
+            svc.Update(savedObj);
+            //svc.Save();
            
             // Assert -- see if the record retreived from the database matches the one i just updated
-            Reward updatedObj = repository.GetById(obj.RewardID);
+            Reward updatedObj = svc.GetById(obj.RewardID);
 
             Assert.AreEqual(updatedObj.Description, savedObj.Description);
             Assert.AreEqual(updatedObj.Points, savedObj.Points);
 
             // cleanup
-            repository.Delete(updatedObj);
-            repository.Save();
+            svc.Delete(updatedObj);
+            svc.Save();
         }
 
         /// <summary>
-        /// Test Method to Connect to the repository and delete a record
+        /// Test Method to Connect to the svc and delete a record
         /// </summary>
         [TestMethod]
-        public void DeleteRewardFromRepositoryFromFactory()
+        public void DeleteRewardSvc()
         {
             // arrange - Insert a record so that it can be updated.
-            // note connection string is in app.config
+            FamilyPointsContext db = new FamilyPointsContext();
             Factory factory = Factory.GetInstance();
-            IRewardSvc repository = (IRewardSvc)factory.GetService("IRewardSvc");
+            IRewardSvc svc = (IRewardSvc)factory.GetService("IRewardSvc",db);
 
             Reward obj = new Reward();
             obj.Description = "Delete this Reward";
             obj.Points = 3;
-            repository.Insert(obj);
-            repository.Save();
+            svc.Insert(obj);
+            svc.Save();
 
             // act - retrieve the saved record and then remove it.
-            Reward savedObj = repository.GetById(obj.RewardID);
-            repository.Delete(savedObj);
-            repository.Save();
+            Reward savedObj = svc.GetById(obj.RewardID);
+            svc.Delete(savedObj);
+            svc.Save();
 
             // Assert -- see if the record deleted from the database exists
-            Reward removedObj = repository.GetById(obj.RewardID);
+            Reward removedObj = svc.GetById(obj.RewardID);
             Assert.IsNull(removedObj);
 
         }
 
         /// <summary>
-        /// Test Method to List the records in the repository.
+        /// Test Method to List the records in the svc.
         /// </summary>
         [TestMethod]
-        public void ListofRewardsInRepositoryFromFactory()
+        public void ListofRewardsSvc()
         {
             // arrange - Add a record to be listed.
-            // note connection string is in app.config
+            FamilyPointsContext db = new FamilyPointsContext();
             Factory factory = Factory.GetInstance();
-            IRewardSvc repository = (IRewardSvc)factory.GetService("IRewardSvc");
+            IRewardSvc svc = (IRewardSvc)factory.GetService("IRewardSvc",db);
 
             Reward obj = new Reward();
             obj.Description = "Reward 1";
             obj.Points = 1;
-            repository.Insert(obj);
-            repository.Save();
+            svc.Insert(obj);
+            svc.Save();
 
             // act - retrieve the saved records and put them in a list.
-            List<Reward> savedObjs = new List<Reward>(repository.GetRewards());
+            List<Reward> savedObjs = new List<Reward>(svc.GetAll());
 
             // Assert -- The list of saved objects should have a count greater than 0
             Assert.IsTrue(savedObjs.Count > 0);

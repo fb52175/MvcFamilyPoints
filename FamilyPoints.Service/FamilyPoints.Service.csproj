@@ -55,10 +55,12 @@
     <Compile Include="IChildSvc.cs" />
     <Compile Include="IFamilySvc.cs" />
     <Compile Include="IParentSvc.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="ITransactionSvc.cs" />
     <Compile Include="ParentSvcImpl.cs" />
     <Compile Include="ChildSvcImpl.cs" />
+    <Compile Include="Repository.cs" />
     <Compile Include="TransactionSvcImpl.cs" />
     <Compile Include="BehaviorSvcImpl.cs" />
     <Compile Include="IRewardSvc.cs" />
@@ -66,13 +68,13 @@
     <Compile Include="RewardSvcImpl.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\FamilyPoints.Domain\FamilyPoints.Domain.csproj">
       <Project>{6659dbee-4b32-423f-bcef-703ef8c1c4be}</Project>
       <Name>FamilyPoints.Domain</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -22,7 +22,7 @@ namespace MvcFamilyPoints.Controllers
         public ActionResult Index()
         {
 
-            return View(rewardRepository.GetRewards());
+            return View(rewardRepository.GetAll());
         }
 
         //

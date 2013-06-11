@@ -163,6 +163,10 @@
     <Content Include="Views\Home\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FamilyPoints.Business\FamilyPoints.Business.csproj">
+      <Project>{0ef5c12c-77e0-4111-98ea-280b317b2ea9}</Project>
+      <Name>FamilyPoints.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FamilyPoints.Domain\FamilyPoints.Domain.csproj">
       <Project>{6659dbee-4b32-423f-bcef-703ef8c1c4be}</Project>
       <Name>FamilyPoints.Domain</Name>

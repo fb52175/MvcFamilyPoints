@@ -54,11 +54,17 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BehaviorMgrTest.cs" />
-    <Compile Include="FamilyPointsContextInitializer.cs" />
+    <Compile Include="TransactionMgrTest.cs" />
+    <Compile Include="FamilyMgrTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ParentMgrTest.cs" />
     <Compile Include="ChildMgrTest.cs" />
     <Compile Include="RewardMgrTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FamilyPoints.Business\FamilyPoints.Business.csproj">
@@ -73,9 +79,6 @@
       <Project>{cdda9628-a6d5-41b5-92a1-47898005a924}</Project>
       <Name>FamilyPoints.Service</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
