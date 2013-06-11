@@ -19,4 +19,5 @@ Added a unit test to test the RewardsRepository add/update/delete and list funct
 Week 5 - Refactored the Repository Factory to be a decoupled factory.  
 Added Business Managers to and used the facade pattern to implements some of the use cases.
 I also renamed all the projects and namespaces to match the pattern application.layer, rather than applicationlayer.
-I am having issues with DBContext in my unit test on the Family Object.  I beleive this is because I am creating a new dbcontext each time I hit a repository.
+I have corrected issues with DBContext in my unit test on the Family Object.  This was because I was creating a new dbcontext each time I hit a repository.
+The service factory now accepts arguments, so that the dbcontext can be injected.
