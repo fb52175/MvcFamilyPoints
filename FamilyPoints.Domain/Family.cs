@@ -7,8 +7,8 @@ namespace FamilyPoints.Domain
 {
     public class Family
     {
-        public int FamilyID { get; set; }
-        public string Name { get; set; }
+        public int FamilyId { get; set; }
+        public string FamilyName { get; set; }
         public virtual ICollection<Parent> Parents { get; set; }
         public virtual ICollection<Child> Children { get; set; }
 

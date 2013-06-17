@@ -13,8 +13,6 @@ namespace MvcFamilyPoints.Controllers
     public class HomeController : Controller
     {
         //private FamilyPointsContext db = new FamilyPointsContext();
-        //static Factory factory = Factory.GetInstance();
-        //IRewardSvc rewardRepository = (IRewardSvc)factory.GetService("IRewardSvc");
         RewardMgr mgr = new RewardMgr();
 
         //
@@ -118,7 +116,7 @@ namespace MvcFamilyPoints.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            //mgr.Dispose();
+            mgr.context.Dispose();
             base.Dispose(disposing);
         }
     }

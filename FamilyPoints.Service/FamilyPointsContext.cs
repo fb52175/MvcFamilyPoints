@@ -1,4 +1,5 @@
-﻿using FamilyPoints.Domain;
+﻿using System.Data.Entity.ModelConfiguration.Conventions;
+using FamilyPoints.Domain;
 using System.Data.Entity;
 
 namespace FamilyPoints.Service
@@ -11,5 +12,6 @@ namespace FamilyPoints.Service
         public DbSet<Behavior> Behaviors { get; set; }
         public DbSet<Reward> Rewards { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+
     }
 }

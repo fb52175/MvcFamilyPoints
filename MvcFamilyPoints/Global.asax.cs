@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using FamilyPoints.Service;
+using System.Data.Entity;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
-using System.Data.Entity;
-using FamilyPoints.Domain;
-using FamilyPoints.Business;
-using FamilyPoints.Service;
 
 namespace MvcFamilyPoints
 {

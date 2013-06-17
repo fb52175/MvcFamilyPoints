@@ -6,7 +6,7 @@ using System;
 
 namespace FamilyPoints.Business
 {
-    public class TransactionMgr
+    public class TransactionMgr : Manager
     {
         public FamilyPointsContext context;
 
@@ -22,41 +22,34 @@ namespace FamilyPoints.Business
 
         public void Create(Transaction transaction)
         {
-            Factory factory = Factory.GetInstance();
-            ITransactionSvc transactionSvc = (ITransactionSvc)factory.GetService("ITransactionSvc", context);
-
+            ITransactionSvc transactionSvc = (ITransactionSvc)GetService(typeof(ITransactionSvc).Name, context);
             transactionSvc.Insert(transaction);
             transactionSvc.Save();
         }
 
         public void Update(Transaction transaction)
         {
-            Factory factory = Factory.GetInstance();
-            ITransactionSvc transactionSvc = (ITransactionSvc)factory.GetService("ITransactionSvc", context);
+            ITransactionSvc transactionSvc = (ITransactionSvc)GetService(typeof(ITransactionSvc).Name, context);
             transactionSvc.Update(transaction);
             transactionSvc.Save();
         }
 
         public void Delete(Transaction transaction)
         {
-            Factory factory = Factory.GetInstance();
-            ITransactionSvc transactionSvc = (ITransactionSvc)factory.GetService("ITransactionSvc", context);
-
+            ITransactionSvc transactionSvc = (ITransactionSvc)GetService(typeof(ITransactionSvc).Name, context);
             transactionSvc.Delete(transaction);
             transactionSvc.Save();
         }
 
         public Transaction Find(int id)
         {
-            Factory factory = Factory.GetInstance();
-            ITransactionSvc transactionSvc = (ITransactionSvc)factory.GetService("ITransactionSvc", context);
+            ITransactionSvc transactionSvc = (ITransactionSvc)GetService(typeof(ITransactionSvc).Name, context);
             return transactionSvc.GetById(id);
         }
 
         public IEnumerable<Transaction> GetTransactions()
         {
-            Factory factory = Factory.GetInstance();
-            ITransactionSvc transactionSvc = (ITransactionSvc)factory.GetService("ITransactionSvc", context);
+            ITransactionSvc transactionSvc = (ITransactionSvc)GetService(typeof(ITransactionSvc).Name, context);
             return transactionSvc.GetAll();
         }
     }

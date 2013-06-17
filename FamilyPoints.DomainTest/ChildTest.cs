@@ -34,10 +34,10 @@ namespace MvcFamilyPoints.Tests
             FamilyPointsContext db = new FamilyPointsContext();
 
             // act -- go get the first record
-            Child savedObj = (from d in db.Children where d.ChildID == 1 select d).Single();
+            Child savedObj = (from d in db.Children where d.ChildId == 1 select d).Single();
 
             // assert
-            Assert.AreEqual(savedObj.ChildID, 1);
+            Assert.AreEqual(savedObj.ChildId, 1);
 
         }
 
@@ -54,13 +54,15 @@ namespace MvcFamilyPoints.Tests
             Child obj = new Child();
             obj.Name = "New Child 1";
             obj.Password = "pasword";
+            Family family = db.Families.FirstOrDefault();
+            obj.Family = family;
             db.Children.Add(obj);
 
             // act
             db.SaveChanges();
 
             // Assert -- see if the record retreived from the database matches the one i just added
-            Child savedObj = (from d in db.Children where d.ChildID == obj.ChildID select d).Single();
+            Child savedObj = (from d in db.Children where d.ChildId == obj.ChildId select d).Single();
 
             Assert.AreEqual(savedObj.Name, obj.Name);
             Assert.AreEqual(savedObj.Password, obj.Password);
@@ -82,18 +84,20 @@ namespace MvcFamilyPoints.Tests
             Child obj = new Child();
             obj.Name = "New Child 2";
             obj.Password = "pasword";
+            Family family = db.Families.FirstOrDefault();
+            obj.Family = family;
             db.Children.Add(obj);
             db.SaveChanges();
            
 
             // act - retrieve the saved record and update it.
-            Child savedObj = (from d in db.Children where d.ChildID == obj.ChildID select d).Single();
+            Child savedObj = (from d in db.Children where d.ChildId == obj.ChildId select d).Single();
             savedObj.Name = "An updated Child 2";
             savedObj.Password = "pasword";
             db.SaveChanges();
            
             // Assert -- see if the record retreived from the database matches the one i just updated
-            Child updatedObj = (from d in db.Children where d.ChildID == obj.ChildID select d).Single();
+            Child updatedObj = (from d in db.Children where d.ChildId == obj.ChildId select d).Single();
 
             Assert.AreEqual(updatedObj.Name, savedObj.Name);
             Assert.AreEqual(updatedObj.Password, savedObj.Password);
@@ -115,16 +119,18 @@ namespace MvcFamilyPoints.Tests
             Child obj = new Child();
             obj.Name = "Delete this Child";
             obj.Password = "pasword";
+            Family family = db.Families.FirstOrDefault();
+            obj.Family = family;
             db.Children.Add(obj);
             db.SaveChanges();
 
             // act - retrieve the saved record and then remove it.
-            Child savedObj = (from d in db.Children where d.ChildID == obj.ChildID select d).Single();
+            Child savedObj = (from d in db.Children where d.ChildId == obj.ChildId select d).Single();
             db.Children.Remove(savedObj);
             db.SaveChanges();
 
             // Assert -- see if the record deleted from the database exists
-            Child removedObj = (from d in db.Children where d.ChildID == savedObj.ChildID select d).FirstOrDefault();
+            Child removedObj = (from d in db.Children where d.ChildId == savedObj.ChildId select d).FirstOrDefault();
             Assert.IsNull(removedObj);
 
         }
@@ -141,6 +147,8 @@ namespace MvcFamilyPoints.Tests
             Child obj = new Child();
             obj.Name = "Child 1";
             obj.Password = "pasword";
+            Family family = db.Families.FirstOrDefault();
+            obj.Family = family;
             db.Children.Add(obj);
             db.SaveChanges();
 

@@ -33,10 +33,10 @@ namespace MvcFamilyPoints.Tests
             FamilyPointsContext db = new FamilyPointsContext();
 
             // act -- go get the first record
-            Family savedObj = (from d in db.Families where d.FamilyID == 1 select d).Single();
+            Family savedObj = (from d in db.Families where d.FamilyId == 1 select d).Single();
 
             // assert
-            Assert.AreEqual(savedObj.FamilyID, 1);
+            Assert.AreEqual(savedObj.FamilyId, 1);
 
         }
 
@@ -50,20 +50,16 @@ namespace MvcFamilyPoints.Tests
             // note connection string is in app.config
             FamilyPointsContext db = new FamilyPointsContext();
             Family obj = new Family();
-            obj.Name = "New Family 1";
-            obj.Children = (from d in db.Children select d).ToList();
-            obj.Parents = (from d in db.Parents select d).ToList();
+            obj.FamilyName = "New Family 1";
             db.Families.Add(obj);
 
             // act
             db.SaveChanges();
 
             // Assert -- see if the record retreived from the database matches the one i just added
-            Family savedObj = (from d in db.Families where d.FamilyID == obj.FamilyID select d).Single();
+            Family savedObj = (from d in db.Families where d.FamilyId == obj.FamilyId select d).Single();
 
-            Assert.AreEqual(savedObj.Name, obj.Name);
-            Assert.AreEqual(savedObj.Children, obj.Children);
-            Assert.AreEqual(savedObj.Parents, obj.Parents);
+            Assert.AreEqual(savedObj.FamilyName, obj.FamilyName);
 
             // cleanup
             db.Families.Remove(savedObj);
@@ -80,24 +76,20 @@ namespace MvcFamilyPoints.Tests
             // note connection string is in app.config
             FamilyPointsContext db = new FamilyPointsContext();
             Family obj = new Family();
-            obj.Name = "New Family 1";
-            obj.Children = (from d in db.Children select d).ToList();
-            obj.Parents = (from d in db.Parents select d).ToList();
+            obj.FamilyName = "New Family 1";
             db.Families.Add(obj);
             db.SaveChanges();
            
 
             // act - retrieve the saved record and update it.
-            Family savedObj = (from d in db.Families where d.FamilyID == obj.FamilyID select d).Single();
-            savedObj.Name = "An updated Family 2";
+            Family savedObj = (from d in db.Families where d.FamilyId == obj.FamilyId select d).Single();
+            savedObj.FamilyName = "An updated Family 2";
             db.SaveChanges();
            
             // Assert -- see if the record retreived from the database matches the one i just updated
-            Family updatedObj = (from d in db.Families where d.FamilyID == obj.FamilyID select d).Single();
+            Family updatedObj = (from d in db.Families where d.FamilyId == obj.FamilyId select d).Single();
 
-            Assert.AreEqual(updatedObj.Name, savedObj.Name);
-            Assert.AreEqual(savedObj.Children, obj.Children);
-            Assert.AreEqual(savedObj.Parents, obj.Parents);
+            Assert.AreEqual(updatedObj.FamilyName, savedObj.FamilyName);
 
             // cleanup
             db.Families.Remove(updatedObj);
@@ -114,19 +106,19 @@ namespace MvcFamilyPoints.Tests
             // note connection string is in app.config
             FamilyPointsContext db = new FamilyPointsContext();
             Family obj = new Family();
-            obj.Name = "Delete this Family";
-            obj.Children = (from d in db.Children select d).ToList();
-            obj.Parents = (from d in db.Parents select d).ToList();
+            obj.FamilyName = "Delete this Family";
+            //obj.Children = (from d in db.Children select d).ToList();
+            //obj.Parents = (from d in db.Parents select d).ToList();
             db.Families.Add(obj);
             db.SaveChanges();
 
             // act - retrieve the saved record and then remove it.
-            Family savedObj = (from d in db.Families where d.FamilyID == obj.FamilyID select d).Single();
+            Family savedObj = (from d in db.Families where d.FamilyId == obj.FamilyId select d).Single();
             db.Families.Remove(savedObj);
             db.SaveChanges();
 
             // Assert -- see if the record deleted from the database exists
-            Family removedObj = (from d in db.Families where d.FamilyID == savedObj.FamilyID select d).FirstOrDefault();
+            Family removedObj = (from d in db.Families where d.FamilyId == savedObj.FamilyId select d).FirstOrDefault();
             Assert.IsNull(removedObj);
 
         }
@@ -141,9 +133,9 @@ namespace MvcFamilyPoints.Tests
             // note connection string is in app.config
             FamilyPointsContext db = new FamilyPointsContext();
             Family obj = new Family();
-            obj.Name = "Family 1";
-            obj.Children = (from d in db.Children select d).ToList();
-            obj.Parents = (from d in db.Parents select d).ToList();
+            obj.FamilyName = "Family 1";
+            //obj.Children = (from d in db.Children select d).ToList();
+            //obj.Parents = (from d in db.Parents select d).ToList();
             db.Families.Add(obj);
             db.SaveChanges();
 

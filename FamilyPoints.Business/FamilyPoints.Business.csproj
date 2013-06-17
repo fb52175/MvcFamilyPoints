@@ -47,6 +47,7 @@
     <Compile Include="FamilyMgr.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Manager.cs" />
     <Compile Include="ParentMgr.cs" />
     <Compile Include="ChildMgr.cs" />
     <Compile Include="RewardMgr.cs" />

@@ -20,8 +20,8 @@ namespace FamilyPoints.BusinessTest
             Transaction obj = new Transaction();
             obj.Description = "Item 1";
             obj.Points = 3;
-            obj.ChildID = 1;
-            obj.ParentID = 1;
+            obj.ChildId = 1;
+            obj.ParentId = 1;
             obj.Date = DateTime.Now;
             obj.PointType = "Reward";
 
@@ -33,8 +33,8 @@ namespace FamilyPoints.BusinessTest
 
             Assert.AreEqual(savedObj.Description, obj.Description);
             Assert.AreEqual(savedObj.Points, obj.Points);
-            Assert.AreEqual(savedObj.ChildID, obj.ChildID);
-            Assert.AreEqual(savedObj.ParentID, obj.ParentID);
+            Assert.AreEqual(savedObj.ChildId, obj.ChildId);
+            Assert.AreEqual(savedObj.ParentId, obj.ParentId);
             Assert.AreEqual(savedObj.PointType, obj.PointType);
             Assert.AreEqual(savedObj.Date, obj.Date);
 
@@ -54,8 +54,8 @@ namespace FamilyPoints.BusinessTest
             Transaction obj = new Transaction();
             obj.Description = "Item 1";
             obj.Points = 3;
-            obj.ChildID = 1;
-            obj.ParentID = 1;
+            obj.ChildId = 1;
+            obj.ParentId = 1;
             obj.Date = DateTime.Now;
             obj.PointType = "Reward";
             mgr.Create(obj);
@@ -64,8 +64,8 @@ namespace FamilyPoints.BusinessTest
             Transaction savedObj = mgr.Find(obj.TransactionID);
             savedObj.Description = "Item 2";
             savedObj.Points = 2;
-            savedObj.ChildID = 1;
-            savedObj.ParentID = 1;
+            savedObj.ChildId = 1;
+            savedObj.ParentId = 1;
             savedObj.Date = DateTime.Now;
             savedObj.PointType = "Reward";
             mgr.Update(savedObj);

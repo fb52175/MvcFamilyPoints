@@ -55,8 +55,8 @@ namespace MvcFamilyPoints.Tests
             Child ch = (from d in db.Children select d).First();
             Transaction obj = new Transaction();
             obj.Date = DateTime.Now;
-            obj.ParentID = pa.ParentID;
-            obj.ChildID = ch.ChildID;
+            obj.ParentId = pa.ParentId;
+            obj.ChildId = ch.ChildId;
             obj.PointType = "Behavior";
             obj.Description = be.Description;
             obj.Points = be.Points;
@@ -70,8 +70,8 @@ namespace MvcFamilyPoints.Tests
 
             Assert.AreEqual(savedObj.Description, obj.Description);
             Assert.AreEqual(savedObj.Points, obj.Points);
-            Assert.AreEqual(savedObj.ParentID, obj.ParentID);
-            Assert.AreEqual(savedObj.ChildID, obj.ChildID);
+            Assert.AreEqual(savedObj.ParentId, obj.ParentId);
+            Assert.AreEqual(savedObj.ChildId, obj.ChildId);
             Assert.AreEqual(savedObj.PointType, obj.PointType);
             Assert.AreEqual(savedObj.Date, obj.Date);
 
@@ -94,8 +94,8 @@ namespace MvcFamilyPoints.Tests
             Child ch = (from d in db.Children select d).First();
             Transaction obj = new Transaction();
             obj.Date = DateTime.Now;
-            obj.ParentID = pa.ParentID;
-            obj.ChildID = ch.ChildID;
+            obj.ParentId = pa.ParentId;
+            obj.ChildId = ch.ChildId;
             obj.PointType = "Behavior";
             obj.Description = be.Description;
             obj.Points = be.Points;
@@ -114,8 +114,8 @@ namespace MvcFamilyPoints.Tests
 
             Assert.AreEqual(updatedObj.Description, savedObj.Description);
             Assert.AreEqual(updatedObj.Points, savedObj.Points);
-            Assert.AreEqual(updatedObj.ParentID, savedObj.ParentID);
-            Assert.AreEqual(updatedObj.ChildID, savedObj.ChildID);
+            Assert.AreEqual(updatedObj.ParentId, savedObj.ParentId);
+            Assert.AreEqual(updatedObj.ChildId, savedObj.ChildId);
             Assert.AreEqual(updatedObj.PointType, savedObj.PointType);
             Assert.AreEqual(updatedObj.Date, savedObj.Date);
 
@@ -138,8 +138,8 @@ namespace MvcFamilyPoints.Tests
             Child ch = (from d in db.Children select d).First();
             Transaction obj = new Transaction();
             obj.Date = DateTime.Now;
-            obj.ParentID = pa.ParentID;
-            obj.ChildID = ch.ChildID;
+            obj.ParentId = pa.ParentId;
+            obj.ChildId = ch.ChildId;
             obj.PointType = "Behavior";
             obj.Description = be.Description;
             obj.Points = be.Points;
@@ -171,8 +171,8 @@ namespace MvcFamilyPoints.Tests
             Child ch = (from d in db.Children select d).First();
             Transaction obj = new Transaction();
             obj.Date = DateTime.Now;
-            obj.ParentID = pa.ParentID;
-            obj.ChildID = ch.ChildID;
+            obj.ParentId = pa.ParentId;
+            obj.ChildId = ch.ChildId;
             obj.PointType = "Behavior";
             obj.Description = be.Description;
             obj.Points = be.Points;

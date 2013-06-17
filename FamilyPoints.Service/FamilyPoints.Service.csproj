@@ -32,9 +32,10 @@
   <ItemGroup>
     <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Microsoft ASP.NET\ASP.NET MVC 4\Packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
@@ -58,6 +59,11 @@
     <Compile Include="IRepository.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="ITransactionSvc.cs" />
+    <Compile Include="Migrations\201306170132178_InitialCreate.cs" />
+    <Compile Include="Migrations\201306170132178_InitialCreate.Designer.cs">
+      <DependentUpon>201306170132178_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ParentSvcImpl.cs" />
     <Compile Include="ChildSvcImpl.cs" />
     <Compile Include="Repository.cs" />
@@ -66,15 +72,22 @@
     <Compile Include="IRewardSvc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RewardSvcImpl.cs" />
+    <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FamilyPoints.Domain\FamilyPoints.Domain.csproj">
       <Project>{6659dbee-4b32-423f-bcef-703ef8c1c4be}</Project>
       <Name>FamilyPoints.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201306170132178_InitialCreate.resx">
+      <DependentUpon>201306170132178_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

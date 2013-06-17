@@ -52,9 +52,9 @@ namespace MvcFamilyPoints.Tests
 
             var family = new List<Family> { new Family()
                                                 {
-                                                    Name = "Doe",
-                                                    Parents = parents,
-                                                    Children= children
+                                                    FamilyName = "Doe",
+                                                    //Parents = parents,
+                                                    //Children= children
 
                                                     
                                                 }
@@ -62,8 +62,8 @@ namespace MvcFamilyPoints.Tests
             var transaction = new List<Transaction> { new Transaction()
                                                 {
                                                     Date=DateTime.Now,
-                                                    ParentID = 1,
-                                                    ChildID = 1,
+                                                    ParentId = 1,
+                                                    ChildId = 1,
                                                     PointType="Behavior",
                                                     Description = "A Behavior",
                                                     Points=1

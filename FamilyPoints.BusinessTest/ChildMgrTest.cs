@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FamilyPoints.Business;
 using FamilyPoints.Domain;
@@ -22,12 +23,14 @@ namespace FamilyPoints.BusinessTest
             Child obj = new Child();
             obj.Name = "Johnny";
             obj.Password = "password";
+            Family family = mgr.context.Families.FirstOrDefault();
+            obj.Family = family;
 
             // act
             mgr.Create(obj);
 
             // Assert -- see if the record retreived from the database matches the one i just added
-            Child savedObj = mgr.Find(obj.ChildID);
+            Child savedObj = mgr.Find(obj.ChildId);
 
             Assert.AreEqual(savedObj.Name, obj.Name);
             Assert.AreEqual(savedObj.Password, obj.Password);
@@ -48,16 +51,18 @@ namespace FamilyPoints.BusinessTest
             Child obj = new Child();
             obj.Name = "Johnny";
             obj.Password = "Password";
+            Family family = mgr.context.Families.FirstOrDefault();
+            obj.Family = family;
             mgr.Create(obj);
 
             // act - retrieve the saved record and update it.
-            Child savedObj = mgr.Find(obj.ChildID);
+            Child savedObj = mgr.Find(obj.ChildId);
             savedObj.Name = "Joey";
             savedObj.Password = "Password";
             mgr.Update(savedObj);
 
             // Assert -- see if the record retreived from the database matches the one i just updated
-            Child updatedObj = mgr.Find(savedObj.ChildID);
+            Child updatedObj = mgr.Find(savedObj.ChildId);
 
             Assert.AreEqual(updatedObj.Name, savedObj.Name);
             Assert.AreEqual(updatedObj.Password, savedObj.Password);
@@ -77,14 +82,16 @@ namespace FamilyPoints.BusinessTest
             Child obj = new Child();
             obj.Name = "Jane";
             obj.Password = "Pasword";
+            Family family = mgr.context.Families.FirstOrDefault();
+            obj.Family = family;
             mgr.Create(obj);
 
             // act - retrieve the saved record and then remove it.
-            Child savedObj = mgr.Find(obj.ChildID);
+            Child savedObj = mgr.Find(obj.ChildId);
             mgr.Delete(savedObj);
 
             // Assert -- see if the record deleted from the database exists
-            Child removedObj = mgr.Find(savedObj.ChildID);
+            Child removedObj = mgr.Find(savedObj.ChildId);
             Assert.IsNull(removedObj);
 
         }
@@ -101,11 +108,14 @@ namespace FamilyPoints.BusinessTest
             Child obj = new Child();
             obj.Name = "Johnny";
             obj.Password = "Password";
+            Family family = mgr.context.Families.FirstOrDefault();
+            obj.Family = family;
             mgr.Create(obj);
 
             Child obj2 = new Child();
             obj2.Name = "Joey";
             obj2.Password = "Password";
+            obj2.Family = family;
             mgr.Create(obj2);
 
             // act - retrieve the saved records and put them in a list.

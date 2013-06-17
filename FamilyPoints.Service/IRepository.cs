@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace FamilyPoints.Service
 {
     public interface IRepository<T> where T :class
     {
         IEnumerable<T> GetAll();
+        IEnumerable<T> Find(Func<T, bool> predicate);
+        T Single(Func<T, bool> predicate);
         T GetById(int id);
         void Insert(T entity);
         void Update(T entity);

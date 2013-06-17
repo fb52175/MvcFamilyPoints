@@ -32,7 +32,7 @@ namespace FamilyPoints.ServiceTests
             Family savedObj = familySvc.GetById(1);
 
             // assert
-            Assert.AreEqual(savedObj.FamilyID, 1);
+            Assert.AreEqual(savedObj.FamilyId, 1);
 
         }
 
@@ -48,16 +48,16 @@ namespace FamilyPoints.ServiceTests
             IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc",db);
 
             Family obj = new Family();
-            obj.Name = "New Family 1";
+            obj.FamilyName = "New Family 1";
             familySvc.Insert(obj);
 
             // act
             familySvc.Save();
 
             // Assert -- see if the record retreived from the database matches the one i just added
-            Family savedObj = familySvc.GetById(obj.FamilyID);
+            Family savedObj = familySvc.GetById(obj.FamilyId);
 
-            Assert.AreEqual(savedObj.Name, obj.Name);
+            Assert.AreEqual(savedObj.FamilyName, obj.FamilyName);
 
             // cleanup
             familySvc.Delete(savedObj);
@@ -76,21 +76,21 @@ namespace FamilyPoints.ServiceTests
             IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc",db);
 
             Family obj = new Family();
-            obj.Name = "New Family 2";
+            obj.FamilyName = "New Family 2";
             familySvc.Insert(obj);
             familySvc.Save();
 
 
             // act - retrieve the saved record and update it.
-            Family savedObj = familySvc.GetById(obj.FamilyID);
-            savedObj.Name = "An updated Family 2";
+            Family savedObj = familySvc.GetById(obj.FamilyId);
+            savedObj.FamilyName = "An updated Family 2";
             familySvc.Update(savedObj);
             //familySvc.Save();
 
             // Assert -- see if the record retreived from the database matches the one i just updated
-            Family updatedObj = familySvc.GetById(obj.FamilyID);
+            Family updatedObj = familySvc.GetById(obj.FamilyId);
 
-            Assert.AreEqual(updatedObj.Name, savedObj.Name);
+            Assert.AreEqual(updatedObj.FamilyName, savedObj.FamilyName);
 
             // cleanup
             familySvc.Delete(updatedObj);
@@ -109,17 +109,17 @@ namespace FamilyPoints.ServiceTests
             IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc",db);
 
             Family obj = new Family();
-            obj.Name = "Delete this Family";
+            obj.FamilyName = "Delete this Family";
             familySvc.Insert(obj);
             familySvc.Save();
 
             // act - retrieve the saved record and then remove it.
-            Family savedObj = familySvc.GetById(obj.FamilyID);
+            Family savedObj = familySvc.GetById(obj.FamilyId);
             familySvc.Delete(savedObj);
             familySvc.Save();
 
             // Assert -- see if the record deleted from the database exists
-            Family removedObj = familySvc.GetById(obj.FamilyID);
+            Family removedObj = familySvc.GetById(obj.FamilyId);
             Assert.IsNull(removedObj);
 
         }
@@ -136,7 +136,7 @@ namespace FamilyPoints.ServiceTests
             IFamilySvc familySvc = (IFamilySvc)factory.GetService("IFamilySvc",db);
 
             Family obj = new Family();
-            obj.Name = "Family 1";
+            obj.FamilyName = "Family 1";
             familySvc.Insert(obj);
             familySvc.Save();
 

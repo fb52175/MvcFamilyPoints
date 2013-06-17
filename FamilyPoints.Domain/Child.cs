@@ -7,8 +7,12 @@ namespace FamilyPoints.Domain
 {
     public class Child
     {
-        public int ChildID { get; set; }
+        public int ChildId { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
+        public int FamilyId { get; set; }
+
+        public virtual Family Family { get; set; }
+        //public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

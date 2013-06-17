@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace FamilyPoints.Business
 {
-    public class ChildMgr
+    public class ChildMgr :Manager
     {
-         public FamilyPointsContext context;
+        public FamilyPointsContext context;
 
         public ChildMgr()
         {
@@ -20,25 +20,28 @@ namespace FamilyPoints.Business
 
         public void Create(Child child)
         {
-            Factory factory = Factory.GetInstance();
-            IChildSvc childSvc = (IChildSvc)factory.GetService("IChildSvc", context);
-
+            IChildSvc childSvc = (IChildSvc)GetService(typeof(IChildSvc).Name, context);
             childSvc.Insert(child);
             childSvc.Save();
         }
 
         public void Update(Child child)
         {
-            Factory factory = Factory.GetInstance();
-            IChildSvc childSvc = (IChildSvc)factory.GetService("IChildSvc", context);
+            IChildSvc childSvc = (IChildSvc)GetService(typeof(IChildSvc).Name, context);
             childSvc.Update(child);
             childSvc.Save();
         }
 
         public void Delete(Child child)
         {
-            Factory factory = Factory.GetInstance();
-            IChildSvc childSvc = (IChildSvc)factory.GetService("IChildSvc", context);
+            IChildSvc childSvc = (IChildSvc)GetService(typeof(IChildSvc).Name, context);
+            ITransactionSvc transactionSvc = (ITransactionSvc)GetService(typeof(ITransactionSvc).Name, context);
+            List<Transaction> TransactionsForChild =
+                new List<Transaction>(transactionSvc.Find(c => c.ChildId.Equals(child.ChildId)));
+            foreach (Transaction transaction in TransactionsForChild)
+            {
+                transactionSvc.Delete(transaction);
+            }
 
             childSvc.Delete(child);
             childSvc.Save();
@@ -46,15 +49,13 @@ namespace FamilyPoints.Business
 
         public Child Find(int id)
         {
-            Factory factory = Factory.GetInstance();
-            IChildSvc childSvc = (IChildSvc)factory.GetService("IChildSvc", context);
+            IChildSvc childSvc = (IChildSvc)GetService(typeof(IChildSvc).Name, context);
             return childSvc.GetById(id);
         }
 
         public IEnumerable<Child> GetChildren()
         {
-            Factory factory = Factory.GetInstance();
-            IChildSvc childSvc = (IChildSvc)factory.GetService("IChildSvc", context);
+            IChildSvc childSvc = (IChildSvc)GetService(typeof(IChildSvc).Name, context);
             return childSvc.GetAll();
         }
     }

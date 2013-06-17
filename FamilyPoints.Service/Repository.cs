@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace FamilyPoints.Service
 {
-    public abstract class Repository<T> : IDisposable, IRepository<T> where T : class 
+    public class Repository<T> : IDisposable, IRepository<T> where T : class 
     { 
         private FamilyPointsContext context;
         private readonly IDbSet<T> dbset;
@@ -25,6 +25,16 @@ namespace FamilyPoints.Service
         public T GetById(int id) 
         {
             return dbset.Find(id); 
+        }
+
+        public T Single(Func<T, bool> predicate)
+        {
+            return dbset.SingleOrDefault(predicate);
+        }
+
+        public IEnumerable<T> Find(Func<T, bool> predicate)
+        {
+            return dbset.Where(predicate).ToList();
         }
 
         public void Insert(T entity) 

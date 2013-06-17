@@ -1,0 +1,70 @@
+﻿@model FamilyPoints.Domain.Family
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Family</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FamilyName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FamilyName)
+    </div>
+
+    <div class="display-label">
+    @Html.LabelFor(model => model.Parents)
+</div>
+    <div class="display-field">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+            @foreach (var item in Model.Parents)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ParentId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    
+    <div class="display-label">
+    @Html.LabelFor(model => model.Children)
+</div>
+    <div class="display-field">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+            @foreach (var item in Model.Children)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ChildId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.FamilyId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

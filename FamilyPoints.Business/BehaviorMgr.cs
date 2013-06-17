@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace FamilyPoints.Business
 {
-    public class BehaviorMgr
+    public class BehaviorMgr : Manager
     {
         public FamilyPointsContext context;
 
@@ -17,10 +17,10 @@ namespace FamilyPoints.Business
         {
             this.context = dbContext;
         }
+
         public void Create(Behavior behavior)
         {
-            Factory factory = Factory.GetInstance();
-            IBehaviorSvc behaviorSvc = (IBehaviorSvc)factory.GetService("IBehaviorSvc",context);
+            IBehaviorSvc behaviorSvc = (IBehaviorSvc)GetService(typeof(IBehaviorSvc).Name, context);
 
             behaviorSvc.Insert(behavior);
             behaviorSvc.Save();
@@ -28,16 +28,14 @@ namespace FamilyPoints.Business
 
         public void Update(Behavior behavior)
         {
-            Factory factory = Factory.GetInstance();
-            IBehaviorSvc behaviorSvc = (IBehaviorSvc)factory.GetService("IBehaviorSvc", context);
+            IBehaviorSvc behaviorSvc = (IBehaviorSvc)GetService(typeof(IBehaviorSvc).Name, context);
             behaviorSvc.Update(behavior);
             behaviorSvc.Save();
         }
 
         public void Delete(Behavior behavior)
         {
-            Factory factory = Factory.GetInstance();
-            IBehaviorSvc behaviorSvc = (IBehaviorSvc)factory.GetService("IBehaviorSvc", context);
+            IBehaviorSvc behaviorSvc = (IBehaviorSvc)GetService(typeof(IBehaviorSvc).Name, context);
 
             behaviorSvc.Delete(behavior);
             behaviorSvc.Save();
@@ -45,15 +43,13 @@ namespace FamilyPoints.Business
 
         public Behavior Find(int id)
         {
-            Factory factory = Factory.GetInstance();
-            IBehaviorSvc behaviorSvc = (IBehaviorSvc)factory.GetService("IBehaviorSvc", context);
+            IBehaviorSvc behaviorSvc = (IBehaviorSvc)GetService(typeof(IBehaviorSvc).Name, context);
             return behaviorSvc.GetById(id);
         }
 
         public IEnumerable<Behavior> GetBehaviors()
         {
-            Factory factory = Factory.GetInstance();
-            IBehaviorSvc behaviorSvc = (IBehaviorSvc)factory.GetService("IBehaviorSvc", context);
+            IBehaviorSvc behaviorSvc = (IBehaviorSvc)GetService(typeof(IBehaviorSvc).Name, context);
             return behaviorSvc.GetAll();
         }
     }

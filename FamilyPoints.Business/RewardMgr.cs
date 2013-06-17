@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace FamilyPoints.Business
 {
-    public class RewardMgr
+    public class RewardMgr : Manager
     {
         public FamilyPointsContext context;
 
@@ -20,41 +20,34 @@ namespace FamilyPoints.Business
 
         public void Create(Reward reward)
         {
-            Factory factory = Factory.GetInstance();
-            IRewardSvc rewardSvc = (IRewardSvc)factory.GetService("IRewardSvc", context);
-
+            IRewardSvc rewardSvc = (IRewardSvc)GetService(typeof(IRewardSvc).Name, context);
             rewardSvc.Insert(reward);
             rewardSvc.Save();
         }
 
         public void Update(Reward reward)
         {
-            Factory factory = Factory.GetInstance();
-            IRewardSvc rewardSvc = (IRewardSvc)factory.GetService("IRewardSvc", context);
+            IRewardSvc rewardSvc = (IRewardSvc)GetService(typeof(IRewardSvc).Name, context);
             rewardSvc.Update(reward);
             rewardSvc.Save();
         }
 
         public void Delete(Reward reward)
         {
-            Factory factory = Factory.GetInstance();
-            IRewardSvc rewardSvc = (IRewardSvc)factory.GetService("IRewardSvc", context);
-
+            IRewardSvc rewardSvc = (IRewardSvc)GetService(typeof(IRewardSvc).Name, context);
             rewardSvc.Delete(reward);
             rewardSvc.Save();
         }
 
         public Reward Find(int id)
         {
-            Factory factory = Factory.GetInstance();
-            IRewardSvc rewardSvc = (IRewardSvc)factory.GetService("IRewardSvc", context);
+            IRewardSvc rewardSvc = (IRewardSvc)GetService(typeof(IRewardSvc).Name, context);
             return rewardSvc.GetById(id);
         }
 
         public IEnumerable<Reward> GetRewards()
         {
-            Factory factory = Factory.GetInstance();
-            IRewardSvc rewardSvc = (IRewardSvc)factory.GetService("IRewardSvc", context);
+            IRewardSvc rewardSvc = (IRewardSvc)GetService(typeof(IRewardSvc).Name, context);
             return rewardSvc.GetAll();
         }
     }
