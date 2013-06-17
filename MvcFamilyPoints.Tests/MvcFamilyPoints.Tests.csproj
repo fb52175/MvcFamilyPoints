@@ -129,12 +129,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MvcFamilyPoints\MvcFamilyPoints.csproj">
-      <Project>{0AB18D54-E7BB-4300-BB4D-B172D5A2DE5E}</Project>
-      <Name>MvcFamilyPoints</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.7\tools\Microsoft.Bcl.Build.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

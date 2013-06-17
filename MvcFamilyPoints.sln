@@ -1,10 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcFamilyPoints", "MvcFamilyPoints\MvcFamilyPoints.csproj", "{0AB18D54-E7BB-4300-BB4D-B172D5A2DE5E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcFamilyPoints.Tests", "MvcFamilyPoints.Tests\MvcFamilyPoints.Tests.csproj", "{1B05EE44-9F43-4FB9-A85A-D0BB95029663}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B57F137F-BD5D-48C3-9258-A6DB11E3A13F}"
 	ProjectSection(SolutionItems) = preProject
 		ReadMe.txt = ReadMe.txt
@@ -32,14 +28,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0AB18D54-E7BB-4300-BB4D-B172D5A2DE5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0AB18D54-E7BB-4300-BB4D-B172D5A2DE5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0AB18D54-E7BB-4300-BB4D-B172D5A2DE5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0AB18D54-E7BB-4300-BB4D-B172D5A2DE5E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1B05EE44-9F43-4FB9-A85A-D0BB95029663}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B05EE44-9F43-4FB9-A85A-D0BB95029663}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1B05EE44-9F43-4FB9-A85A-D0BB95029663}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B05EE44-9F43-4FB9-A85A-D0BB95029663}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0EF5C12C-77E0-4111-98EA-280B317B2EA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0EF5C12C-77E0-4111-98EA-280B317B2EA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EF5C12C-77E0-4111-98EA-280B317B2EA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
