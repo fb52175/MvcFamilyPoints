@@ -13,6 +13,6 @@ namespace FamilyPoints.Domain
         public int FamilyId { get; set; }
 
         public virtual Family Family { get; set; }
-        //public virtual ICollection<Transaction> Transactions { get; set; }
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

@@ -12,6 +12,11 @@ namespace FamilyPoints.Service
         public DbSet<Behavior> Behaviors { get; set; }
         public DbSet<Reward> Rewards { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+    
 
-    }
+        protected override void OnModelCreating( DbModelBuilder modelBuilder )
+        {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        }
+    } 
 }

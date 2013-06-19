@@ -20,7 +20,8 @@ namespace FamilyPoints.MVC.Controllers
 
         public ActionResult Index()
         {
-            return View(mgr.GetTransactions());
+            var transactions = mgr.context.Transactions.Include(t => t.Parent).Include(t => t.Child);
+            return View(transactions.ToList());
         }
 
         //
@@ -41,6 +42,8 @@ namespace FamilyPoints.MVC.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.ParentId = new SelectList(mgr.context.Parents, "ParentId", "Name");
+            ViewBag.ChildId = new SelectList(mgr.context.Children, "ChildId", "Name");
             return View();
         }
 
@@ -57,6 +60,8 @@ namespace FamilyPoints.MVC.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.ParentId = new SelectList(mgr.context.Parents, "ParentId", "Name", transaction.ParentId);
+            ViewBag.ChildId = new SelectList(mgr.context.Children, "ChildId", "Name", transaction.ChildId);
             return View(transaction);
         }
 
@@ -70,6 +75,8 @@ namespace FamilyPoints.MVC.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ParentId = new SelectList(mgr.context.Parents, "ParentId", "Name", transaction.ParentId);
+            ViewBag.ChildId = new SelectList(mgr.context.Children, "ChildId", "Name", transaction.ChildId);
             return View(transaction);
         }
 
@@ -85,6 +92,8 @@ namespace FamilyPoints.MVC.Controllers
                 mgr.Update(transaction);
                 return RedirectToAction("Index");
             }
+            ViewBag.ParentId = new SelectList(mgr.context.Parents, "ParentId", "Name", transaction.ParentId);
+            ViewBag.ChildId = new SelectList(mgr.context.Children, "ChildId", "Name", transaction.ChildId);
             return View(transaction);
         }
 

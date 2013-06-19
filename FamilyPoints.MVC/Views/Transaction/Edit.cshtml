@@ -24,18 +24,18 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ChildId)
+            @Html.LabelFor(model => model.ChildId, "Child")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ChildId)
+            @Html.DropDownList("ChildId", String.Empty)
             @Html.ValidationMessageFor(model => model.ChildId)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ParentId)
+            @Html.LabelFor(model => model.ParentId, "Parent")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ParentId)
+            @Html.DropDownList("ParentId", String.Empty)
             @Html.ValidationMessageFor(model => model.ParentId)
         </div>
 

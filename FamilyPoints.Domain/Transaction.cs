@@ -15,7 +15,7 @@ namespace FamilyPoints.Domain
         public string Description { get; set; }
         public int Points { get; set; }
 
-        //public virtual Parent Parent { get; set; }
-        //public virtual Child Child { get; set; }
+        public virtual Parent Parent { get; set; }
+        public virtual Child Child { get; set; }
     }
 }

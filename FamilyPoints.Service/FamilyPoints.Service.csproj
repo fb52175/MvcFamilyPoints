@@ -63,6 +63,10 @@
     <Compile Include="Migrations\201306170132178_InitialCreate.Designer.cs">
       <DependentUpon>201306170132178_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201306180254328_2.cs" />
+    <Compile Include="Migrations\201306180254328_2.Designer.cs">
+      <DependentUpon>201306180254328_2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ParentSvcImpl.cs" />
     <Compile Include="ChildSvcImpl.cs" />
@@ -87,6 +91,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201306170132178_InitialCreate.resx">
       <DependentUpon>201306170132178_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201306180254328_2.resx">
+      <DependentUpon>201306180254328_2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

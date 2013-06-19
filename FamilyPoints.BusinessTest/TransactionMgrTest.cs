@@ -19,11 +19,15 @@ namespace FamilyPoints.BusinessTest
             TransactionMgr mgr = new TransactionMgr();
             Transaction obj = new Transaction();
             obj.Description = "Item 1";
-            obj.Points = 3;
-            obj.ChildId = 1;
             obj.ParentId = 1;
             obj.Date = DateTime.Now;
             obj.PointType = "Reward";
+            ParentMgr pMgr = new ParentMgr(mgr.context);
+            List<Parent> parents = new List<Parent>(pMgr.GetParents());
+            obj.Parent = parents[0];
+            ChildMgr cMgr = new ChildMgr(mgr.context);
+            List<Child> children = new List<Child>(cMgr.GetChildren());
+            obj.Child = children[0];
 
             // act
             mgr.Create(obj);
@@ -53,11 +57,15 @@ namespace FamilyPoints.BusinessTest
             TransactionMgr mgr = new TransactionMgr();
             Transaction obj = new Transaction();
             obj.Description = "Item 1";
-            obj.Points = 3;
-            obj.ChildId = 1;
             obj.ParentId = 1;
             obj.Date = DateTime.Now;
             obj.PointType = "Reward";
+            ParentMgr pMgr = new ParentMgr(mgr.context);
+            List<Parent> parents = new List<Parent>(pMgr.GetParents());
+            obj.Parent = parents[0];
+            ChildMgr cMgr = new ChildMgr(mgr.context);
+            List<Child> children = new List<Child>(cMgr.GetChildren());
+            obj.Child = children[0];
             mgr.Create(obj);
 
             // act - retrieve the saved record and update it.
@@ -92,6 +100,12 @@ namespace FamilyPoints.BusinessTest
             obj.Description = "Delete this Transaction";
             obj.Points = 3;
             obj.Date = DateTime.Now;
+            ParentMgr pMgr = new ParentMgr(mgr.context);
+            List<Parent> parents = new List<Parent>(pMgr.GetParents());
+            obj.Parent = parents[0];
+            ChildMgr cMgr = new ChildMgr(mgr.context);
+            List<Child> children = new List<Child>(cMgr.GetChildren());
+            obj.Child = children[0];
             mgr.Create(obj);
 
             // act - retrieve the saved record and then remove it.
@@ -117,12 +131,20 @@ namespace FamilyPoints.BusinessTest
             obj.Description = "Transaction 1";
             obj.Points = 1;
             obj.Date = DateTime.Now;
+            ParentMgr pMgr = new ParentMgr(mgr.context);
+            List<Parent> parents = new List<Parent>(pMgr.GetParents());
+            obj.Parent = parents[0];
+            ChildMgr cMgr = new ChildMgr(mgr.context);
+            List<Child> children = new List<Child>(cMgr.GetChildren());
+            obj.Child = children[0];
             mgr.Create(obj);
 
             Transaction obj2 = new Transaction();
             obj2.Description = "Transaction 2";
             obj2.Points = 2;
             obj2.Date = DateTime.Now;
+            obj2.Parent = parents[0];
+            obj2.Child = children[0];
             mgr.Create(obj2);
 
             // act - retrieve the saved records and put them in a list.
