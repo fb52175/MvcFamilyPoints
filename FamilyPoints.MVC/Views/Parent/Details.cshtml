@@ -29,6 +29,12 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.Family.FamilyName)
     </div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EMail)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EMail)
+    </div>
 </fieldset>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.ParentId }) |

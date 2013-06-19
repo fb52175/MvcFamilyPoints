@@ -36,6 +36,13 @@
             @Html.DropDownList("FamilyId", String.Empty)
             @Html.ValidationMessageFor(model => model.FamilyId)
         </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EMail)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EMail)
+            @Html.ValidationMessageFor(model => model.EMail)
+        </div>
 
         <p>
             <input type="submit" value="Create" />

@@ -54,6 +54,7 @@ namespace MvcFamilyPoints.Tests
             Parent obj = new Parent();
             obj.Name = "New Parent 1";
             obj.Password = "pasword";
+            obj.EMail = "P1@familyPoints.net";
             Family family = db.Families.FirstOrDefault();
             obj.Family = family;
             db.Parents.Add(obj);
@@ -84,6 +85,7 @@ namespace MvcFamilyPoints.Tests
             Parent obj = new Parent();
             obj.Name = "New Parent 2";
             obj.Password = "pasword";
+            obj.EMail = "P2@familyPoints.net";
             Family family = db.Families.FirstOrDefault();
             obj.Family = family;
             db.Parents.Add(obj);
@@ -119,6 +121,7 @@ namespace MvcFamilyPoints.Tests
             Parent obj = new Parent();
             obj.Name = "Delete this Parent";
             obj.Password = "pasword";
+            obj.EMail = "John@familyPoints.net";
             Family family = db.Families.FirstOrDefault();
             obj.Family = family;
             db.Parents.Add(obj);
@@ -147,6 +150,7 @@ namespace MvcFamilyPoints.Tests
             Parent obj = new Parent();
             obj.Name = "Parent 1";
             obj.Password = "pasword";
+            obj.EMail = "P1@familyPoints.net";
             Family family = db.Families.FirstOrDefault();
             obj.Family = family;
             db.Parents.Add(obj);

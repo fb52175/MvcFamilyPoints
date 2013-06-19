@@ -40,7 +40,8 @@ namespace MvcFamilyPoints.Tests
             var parents = new List<Parent> { new Parent()
                                                 {
                                                     Name = "Mom",
-                                                    Password = "Mom"
+                                                    Password = "Mom",
+                                                    EMail = "Mom@familyPoints.net"
                                                 }
         };
             var children = new List<Child> { new Child()

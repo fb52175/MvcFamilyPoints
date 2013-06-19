@@ -9,7 +9,7 @@ namespace FamilyPoints.Service.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(FamilyPoints.Service.FamilyPointsContext context)

@@ -11,6 +11,7 @@ namespace FamilyPoints.Domain
         public string Name { get; set; }
         public string Password { get; set; }
         public int FamilyId { get; set; }
+        public string EMail { get; set; }
 
         public virtual Family Family { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
