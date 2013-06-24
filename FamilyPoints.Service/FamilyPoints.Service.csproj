@@ -59,9 +59,9 @@
     <Compile Include="IRepository.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="ITransactionSvc.cs" />
-    <Compile Include="Migrations\201306190107160_Initial.cs" />
-    <Compile Include="Migrations\201306190107160_Initial.Designer.cs">
-      <DependentUpon>201306190107160_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201306240003054_addCurrentPoints.cs" />
+    <Compile Include="Migrations\201306240003054_addCurrentPoints.Designer.cs">
+      <DependentUpon>201306240003054_addCurrentPoints.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ParentSvcImpl.cs" />
@@ -85,8 +85,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201306190107160_Initial.resx">
-      <DependentUpon>201306190107160_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201306240003054_addCurrentPoints.resx">
+      <DependentUpon>201306240003054_addCurrentPoints.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

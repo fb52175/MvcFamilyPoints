@@ -23,6 +23,7 @@ namespace FamilyPoints.Business
         public void Create(Transaction transaction)
         {
             ITransactionSvc transactionSvc = (ITransactionSvc)GetService(typeof(ITransactionSvc).Name, context);
+            
             transactionSvc.Insert(transaction);
             transactionSvc.Save();
         }
@@ -52,5 +53,6 @@ namespace FamilyPoints.Business
             ITransactionSvc transactionSvc = (ITransactionSvc)GetService(typeof(ITransactionSvc).Name, context);
             return transactionSvc.GetAll();
         }
+
     }
 }

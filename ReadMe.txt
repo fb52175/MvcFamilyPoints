@@ -25,3 +25,6 @@ The service factory now accepts arguments, so that the dbcontext can be injected
 Week 6   - I refactored the Business layer managers to use the Super Type design pattern.  This allowed the creation of service factory to be moved to the super class.
 I began work on the presentation layer.  I have created controllers and views for each of the domain objects in order to do CRUD operations.  
 I modified the scaffolding to add a menu item to the list page for each domain object.  For the family domain object I modified the details view to show the parents and children associated to the family.
+
+Week 7 - I refactored to add fields for EMail on the Parent class, and CurrentPoints on the Child class.  I updated the home controller to show the current points for each child,
+and added links to the transaction controller to transactions for behaviors and rewards for the child.

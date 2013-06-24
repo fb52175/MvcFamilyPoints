@@ -338,6 +338,8 @@
     <Content Include="Views\Transaction\Create.cshtml" />
     <Content Include="Views\Transaction\Edit.cshtml" />
     <Content Include="Views\Transaction\Delete.cshtml" />
+    <Content Include="Views\Transaction\AddBehavior.cshtml" />
+    <Content Include="Views\Transaction\AddReward.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

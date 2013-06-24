@@ -47,6 +47,8 @@ namespace FamilyPoints.MVC.Controllers
             return View();
         }
 
+ 
+
         //
         // POST: /Transaction/Create
 
@@ -62,6 +64,52 @@ namespace FamilyPoints.MVC.Controllers
 
             ViewBag.ParentId = new SelectList(mgr.context.Parents, "ParentId", "Name", transaction.ParentId);
             ViewBag.ChildId = new SelectList(mgr.context.Children, "ChildId", "Name", transaction.ChildId);
+            return View(transaction);
+        }
+
+      
+
+        public ActionResult AddBehavior(int childId)
+        {
+            ViewBag.ParentId = new SelectList(mgr.context.Parents, "ParentId", "Name");
+            ViewData["ChildId"] = childId;
+            ViewData["PointType"] = "Behavior";
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddBehavior(Transaction transaction)
+        {
+            if (ModelState.IsValid)
+            {
+                mgr.Create(transaction);
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.ParentId = new SelectList(mgr.context.Parents, "ParentId", "Name", transaction.ParentId);
+            return View(transaction);
+        }
+
+        public ActionResult AddReward(int childId)
+        {
+            ViewBag.ParentId = new SelectList(mgr.context.Parents, "ParentId", "Name");
+            ViewData["ChildId"] = childId;
+            ViewData["PointType"] = "Behavior";
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddReward(Transaction transaction)
+        {
+            if (ModelState.IsValid)
+            {
+                mgr.Create(transaction);
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.ParentId = new SelectList(mgr.context.Parents, "ParentId", "Name", transaction.ParentId);
             return View(transaction);
         }
 

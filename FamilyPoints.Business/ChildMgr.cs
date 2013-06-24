@@ -56,7 +56,37 @@ namespace FamilyPoints.Business
         public IEnumerable<Child> GetChildren()
         {
             IChildSvc childSvc = (IChildSvc)GetService(typeof(IChildSvc).Name, context);
+            foreach (var child in childSvc.GetAll())
+            {
+                CalculateCurrentPoints(child);
+            }
             return childSvc.GetAll();
         }
+
+        public void CalculateCurrentPoints(Child child)
+        {
+            IChildSvc childSvc = (IChildSvc)GetService(typeof(IChildSvc).Name, context);
+            ITransactionSvc transactionSvc = (ITransactionSvc)GetService(typeof(ITransactionSvc).Name, context);
+            List<Transaction> transactionsForChild = 
+                new List<Transaction>(transactionSvc.Find(c => c.ChildId.Equals(child.ChildId)));
+           
+            int totalRewards = 0;
+            int totalBehaviors = 0;
+            foreach (Transaction transaction in transactionsForChild)
+            {        
+                if (transaction.PointType == "Behavior")
+                {
+                    totalBehaviors = totalBehaviors + transaction.Points;
+                }
+                else if (transaction.PointType == "Reward")
+                {
+                    totalRewards = totalRewards + transaction.Points;
+                }
+            }
+
+            child.CurrentPoints= totalBehaviors - totalRewards;
+        }
+
+        
     }
 }

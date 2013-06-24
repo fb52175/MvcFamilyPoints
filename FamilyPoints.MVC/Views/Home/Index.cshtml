@@ -1,4 +1,8 @@
-﻿@{
+﻿
+@model IEnumerable<FamilyPoints.Domain.Child>
+
+
+@{
     ViewBag.Title = "Family Points";
 }
 @section featured {
@@ -11,5 +15,38 @@
         </div>
     </section>
 }
-<h3></h3>
+<h3>Children</h3>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Family.FamilyName)
+        </th>
+         <th>
+            @Html.DisplayNameFor(model => model.CurrentPoints)
+        </th>
+
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Family.FamilyName)
+        </td>
+         <td>
+            @Html.DisplayFor(modelItem => item.CurrentPoints)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Add Behavior", "AddBehavior","Transaction", new { ChildId=item.ChildId, PointType="Behavior"},null)|
+            @Html.ActionLink("Add Reward", "AddReward","Transaction", new { ChildId=item.ChildId, PointType="Reward"},null)
+        </td>
+    </tr>
+}
+    </table>
 

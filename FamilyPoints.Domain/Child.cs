@@ -10,6 +10,7 @@ namespace FamilyPoints.Domain
         public int ChildId { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
+        public int CurrentPoints { get; set; }
         public int FamilyId { get; set; }
 
         public virtual Family Family { get; set; }

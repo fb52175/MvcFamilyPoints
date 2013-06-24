@@ -5,18 +5,18 @@ namespace FamilyPoints.Service.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    public sealed partial class Initial : IMigrationMetadata
+    public sealed partial class addCurrentPoints : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addCurrentPoints));
         
         string IMigrationMetadata.Id
         {
-            get { return "201306190107160_Initial"; }
+            get { return "201306240003054_addCurrentPoints"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return Resources.GetString("Source"); }
+            get { return null; }
         }
         
         string IMigrationMetadata.Target

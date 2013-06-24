@@ -7,20 +7,21 @@ using System.Web;
 using System.Web.Mvc;
 using FamilyPoints.Domain;
 using FamilyPoints.Service;
+using FamilyPoints.Business;
 
 namespace FamilyPoints.MVC.Controllers
 {
     public class ChildController : Controller
     {
-        private FamilyPointsContext db = new FamilyPointsContext();
+        private ChildMgr mgr = new ChildMgr();
 
         //
         // GET: /Child/
 
         public ActionResult Index()
         {
-            var children = db.Children.Include(c => c.Family);
-            return View(children.ToList());
+            var children = mgr.context.Children.Include(c => c.Family);
+            return View(mgr.GetChildren());
         }
 
         //
@@ -28,7 +29,7 @@ namespace FamilyPoints.MVC.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Child child = db.Children.Find(id);
+            Child child = mgr.Find(id);
             if (child == null)
             {
                 return HttpNotFound();
@@ -41,7 +42,7 @@ namespace FamilyPoints.MVC.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.FamilyId = new SelectList(db.Families, "FamilyId", "FamilyName");
+            ViewBag.FamilyId = new SelectList(mgr.context.Families, "FamilyId", "FamilyName");
             return View();
         }
 
@@ -54,12 +55,11 @@ namespace FamilyPoints.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Children.Add(child);
-                db.SaveChanges();
+                mgr.Create(child);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.FamilyId = new SelectList(db.Families, "FamilyId", "FamilyName", child.FamilyId);
+            ViewBag.FamilyId = new SelectList(mgr.context.Families, "FamilyId", "FamilyName", child.FamilyId);
             return View(child);
         }
 
@@ -68,12 +68,12 @@ namespace FamilyPoints.MVC.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Child child = db.Children.Find(id);
+            Child child = mgr.Find(id);
             if (child == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.FamilyId = new SelectList(db.Families, "FamilyId", "FamilyName", child.FamilyId);
+            ViewBag.FamilyId = new SelectList(mgr.context.Families, "FamilyId", "FamilyName", child.FamilyId);
             return View(child);
         }
 
@@ -86,11 +86,10 @@ namespace FamilyPoints.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(child).State = EntityState.Modified;
-                db.SaveChanges();
+                mgr.Update(child);
                 return RedirectToAction("Index");
             }
-            ViewBag.FamilyId = new SelectList(db.Families, "FamilyId", "FamilyName", child.FamilyId);
+            ViewBag.FamilyId = new SelectList(mgr.context.Families, "FamilyId", "FamilyName", child.FamilyId);
             return View(child);
         }
 
@@ -99,7 +98,7 @@ namespace FamilyPoints.MVC.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            Child child = db.Children.Find(id);
+            Child child = mgr.Find(id);
             if (child == null)
             {
                 return HttpNotFound();
@@ -114,16 +113,23 @@ namespace FamilyPoints.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Child child = db.Children.Find(id);
-            db.Children.Remove(child);
-            db.SaveChanges();
+            Child child = mgr.Find(id);
+            mgr.Delete(child);
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
+            mgr.context.Dispose();
             base.Dispose(disposing);
+        }
+
+        public ActionResult ChildSummary()
+        {
+            ViewBag.Message = "Child Summary page.";
+            var children = mgr.context.Children.Include(c => c.Family);
+            return View(children.ToList());
+            
         }
     }
 }
