@@ -28,3 +28,6 @@ I modified the scaffolding to add a menu item to the list page for each domain o
 
 Week 7 - I refactored to add fields for EMail on the Parent class, and CurrentPoints on the Child class.  I updated the home controller to show the current points for each child,
 and added links to the transaction controller to transactions for behaviors and rewards for the child.
+
+Week 8 - Added functions to the Home page.  You can now add behaviors and rewards for the children from the home page.  The controllers populates the childs name and point type based on the link selected.
+Also added some functions to the managers to get the transactions for a child.  Added some text on the child transaction page to display the child name and the childs current points.
