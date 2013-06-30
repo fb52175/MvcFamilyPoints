@@ -93,6 +93,12 @@ h5, h6 {
 
 /* main layout
 ----------------------------------------------------------*/
+
+#main {
+    display: none;
+    padding: 30px 30px 15px 30px;
+ }
+
 .content-wrapper {
     margin: 0 auto;
     max-width: 960px;

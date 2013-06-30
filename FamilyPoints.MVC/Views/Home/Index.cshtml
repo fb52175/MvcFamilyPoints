@@ -44,7 +44,8 @@
         
         <td>
             @Html.ActionLink("Add Behavior", "AddBehavior","Transaction", new { ChildId=item.ChildId, PointType="Behavior"},null)|
-            @Html.ActionLink("Add Reward", "AddReward","Transaction", new { ChildId=item.ChildId, PointType="Reward"},null)
+            @Html.ActionLink("Add Reward", "AddReward","Transaction", new { ChildId=item.ChildId, PointType="Reward"},null)|
+            @Html.ActionLink("List Transactions", "ListTransactionsForChild","Transaction", new { ChildId=item.ChildId},null)
         </td>
     </tr>
 }

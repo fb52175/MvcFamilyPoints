@@ -1,4 +1,5 @@
-﻿using FamilyPoints.Domain;
+﻿using System.Linq;
+using FamilyPoints.Domain;
 using FamilyPoints.Service;
 using System.Collections.Generic;
 
@@ -38,7 +39,7 @@ namespace FamilyPoints.Business
             ITransactionSvc transactionSvc = (ITransactionSvc)GetService(typeof(ITransactionSvc).Name, context);
             List<Transaction> TransactionsForChild =
                 new List<Transaction>(transactionSvc.Find(c => c.ChildId.Equals(child.ChildId)));
-            foreach (Transaction transaction in TransactionsForChild)
+            foreach (Transaction transaction in TransactionsForChild.ToList())
             {
                 transactionSvc.Delete(transaction);
             }
@@ -87,6 +88,5 @@ namespace FamilyPoints.Business
             child.CurrentPoints= totalBehaviors - totalRewards;
         }
 
-        
     }
 }

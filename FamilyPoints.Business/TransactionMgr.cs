@@ -54,5 +54,16 @@ namespace FamilyPoints.Business
             return transactionSvc.GetAll();
         }
 
+        public IEnumerable<Transaction> GetTransactionsForChild(int childId)
+        {
+            ITransactionSvc transactionSvc = (ITransactionSvc)GetService(typeof(ITransactionSvc).Name, context);
+            return transactionSvc.Find(t => t.ChildId.Equals(childId));
+        }
+
+        public IEnumerable<Transaction> GetTransactionsForChild(Child child)
+        {
+            ITransactionSvc transactionSvc = (ITransactionSvc)GetService(typeof(ITransactionSvc).Name, context);
+            return transactionSvc.Find(t => t.ChildId.Equals(child.ChildId));
+        }
     }
 }

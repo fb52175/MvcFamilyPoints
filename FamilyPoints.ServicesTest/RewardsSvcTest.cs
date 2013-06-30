@@ -152,6 +152,10 @@ namespace FamilyPoints.ServiceTests
 
             // Assert -- The list of saved objects should have a count greater than 0
             Assert.IsTrue(savedObjs.Count > 0);
+
+            //cleanup
+            svc.Delete(obj);
+            svc.Save();
         }
 
 

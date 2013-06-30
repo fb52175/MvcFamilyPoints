@@ -20,21 +20,21 @@ namespace MvcFamilyPoints.Tests
         {
             var rewards = new List<Reward> { new Reward()
                                                 {
-                                                    Description = "Seed Reward",
-                                                    Points = 1
+                                                    Description = "30 minutes of TV",
+                                                    Points = 2
                                                 }
         };
 
             var behaviors = new List<Behavior> { new Behavior()
                                                 {
-                                                    Description = "Seed Behavior 1",
-                                                    Points = 10
+                                                    Description = "Make Bed",
+                                                    Points = 2
                                                 }
         };
             behaviors.Add(new Behavior()
                                                  {
-                                                     Description = "Seed Behavior 2",
-                                                     Points = 10
+                                                     Description = "Brush Teeth",
+                                                     Points = 1
                                                  });
 
             var parents = new List<Parent> { new Parent()
@@ -66,7 +66,7 @@ namespace MvcFamilyPoints.Tests
                                                     ParentId = 1,
                                                     ChildId = 1,
                                                     PointType="Behavior",
-                                                    Description = "A Behavior",
+                                                    Description = "Brush Teeth",
                                                     Points=1
                                                 }
         };

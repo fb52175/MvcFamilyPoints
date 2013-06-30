@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 @Html.Hidden("PointType", "Behavior");
-<h2>Create</h2>
+<h2>Add Reward @Html.Encode(ViewData["ChildName"])</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
@@ -21,13 +21,7 @@
             @Html.ValidationMessageFor(model => model.Date)
         </div>
 
-       @* <div class="editor-label">
-            @Html.LabelFor(model => model.ChildId, "Child")
-        </div>
-        <div class="editor-field">
-           @Html.DisplayFor(model => model.Child.Name)
-        </div>*@
-
+  
         <div class="editor-label">
             @Html.LabelFor(model => model.ParentId, "Parent")
         </div>
@@ -36,29 +30,17 @@
             @Html.ValidationMessageFor(model => model.ParentId)
         </div>
 
-        @*<div class="editor-label">
-            @Html.LabelFor(model => model.PointType)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.PointType)
-            @Html.ValidationMessageFor(model => model.PointType)
-        </div>*@
+      
 
-        <div class="editor-label">
+       <div class="editor-label">
             @Html.LabelFor(model => model.Description)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Description)
+             @Html.DropDownList("Description")
             @Html.ValidationMessageFor(model => model.Description)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Points)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Points)
-            @Html.ValidationMessageFor(model => model.Points)
-        </div>
+       
 
         <p>
             <input type="submit" value="Create" />
@@ -67,7 +49,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Summary", "Index","Home")
 </div>
 
 @section Scripts {

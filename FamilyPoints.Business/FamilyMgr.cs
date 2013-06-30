@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using FamilyPoints.Domain;
 using FamilyPoints.Service;
 using System.Collections.Generic;
@@ -57,22 +58,31 @@ namespace FamilyPoints.Business
             familySvc.Save();
         }
 
-        public bool Delete(Family family)
+        public void Delete(Family family)
         {
             IFamilySvc familySvc = (IFamilySvc)GetService(typeof(IFamilySvc).Name, context);
-            if (family.Parents != null || family.Children !=null)
-                return false;
-            try
+            IChildSvc childSvc = (IChildSvc)GetService(typeof(IChildSvc).Name, context);
+            IParentSvc parentSvc = (IParentSvc)GetService(typeof(IParentSvc).Name, context);
+            ChildMgr childMgr = new ChildMgr(context);
+            ParentMgr parentMgr = new ParentMgr(context);
+
+            if (family.Children != null)
             {
-                familySvc.Delete(family);
-                familySvc.Save();
-                return true;
+                foreach (Child child in family.Children.ToList())
+                {
+                    childMgr.Delete(child);
+                }
             }
-            catch (Exception e)
+
+            if (family.Parents != null)
             {
-                return false;
+                foreach (Parent parent in family.Parents.ToList())
+                {
+                    parentMgr.Delete(parent);
+                }
             }
-        
+            familySvc.Delete(family);
+            familySvc.Save();
         }
 
         public Family Find(int id)

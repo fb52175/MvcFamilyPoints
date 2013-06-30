@@ -110,6 +110,10 @@ namespace FamilyPoints.BusinessTest
 
             // Assert -- The list of saved objects should have a count greater than 0
             Assert.IsTrue(savedObjs.Count > 0);
+
+            //Cleanup
+            mgr.Delete(obj);
+            mgr.Delete(obj2);
         }
 
 

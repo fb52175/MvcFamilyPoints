@@ -50,5 +50,11 @@ namespace FamilyPoints.Business
             IRewardSvc rewardSvc = (IRewardSvc)GetService(typeof(IRewardSvc).Name, context);
             return rewardSvc.GetAll();
         }
+
+        public Reward FindByDescription(string description)
+        {
+            IRewardSvc rewardSvc = (IRewardSvc)GetService(typeof(IRewardSvc).Name, context);
+            return rewardSvc.Single(b => b.Description == description);
+        }
     }
 }

@@ -52,5 +52,11 @@ namespace FamilyPoints.Business
             IBehaviorSvc behaviorSvc = (IBehaviorSvc)GetService(typeof(IBehaviorSvc).Name, context);
             return behaviorSvc.GetAll();
         }
+
+        public Behavior FindByDescription(string description)
+        {
+            IBehaviorSvc behaviorSvc = (IBehaviorSvc)GetService(typeof(IBehaviorSvc).Name, context);
+            return behaviorSvc.Single(b => b.Description == description);
+        }
     }
 }

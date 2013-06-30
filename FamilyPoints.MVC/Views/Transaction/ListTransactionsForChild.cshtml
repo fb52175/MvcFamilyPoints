@@ -2,9 +2,10 @@
 
 @{
     ViewBag.Title = "Index";
+    
 }
 
-<h2>Index</h2>
+<h2>Transactions for @Html.Encode(ViewData["ChildName"]), Total Current Points = @Html.Encode(ViewData["CurrentPoints"])</h2>
 
 <table>
     <tr>
@@ -30,6 +31,7 @@
     </tr>
 
 @foreach (var item in Model) {
+   
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Date)
@@ -50,11 +52,16 @@
             @Html.DisplayFor(modelItem => item.Points)
         </td>
         <td>
-          @*  @Html.ActionLink("Edit", "Edit", new { id=item.TransactionID }) |*@
             @Html.ActionLink("Details", "Details", new { id=item.TransactionID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.TransactionID })
         </td>
     </tr>
 }
-
 </table>
+
+
+
+<p>
+     @Html.ActionLink("Back to Summary", "Index","Home")
+</p>
+

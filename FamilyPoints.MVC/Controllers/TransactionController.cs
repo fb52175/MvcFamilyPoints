@@ -14,6 +14,28 @@ namespace FamilyPoints.MVC.Controllers
     public class TransactionController : Controller
     {
         private TransactionMgr mgr = new TransactionMgr();
+        private RewardMgr rewardMgr = new RewardMgr();
+        private BehaviorMgr behaviorMgr = new BehaviorMgr();
+        private ChildMgr childMgr = new ChildMgr();
+
+        private void SetViewBagDescription(string pointType)
+        {  
+            SelectList selectItems = null;
+            if (pointType == "Reward")
+            {
+                List<Reward> rewards = rewardMgr.GetRewards().ToList();
+                selectItems = new SelectList(rewards, "Description", "Description");
+               
+            }
+            else if (pointType == "Behavior")
+            {
+                List<Behavior> behaviors = behaviorMgr.GetBehaviors().ToList();
+                selectItems = new SelectList(behaviors, "Description", "Description");
+            
+            }
+            
+            ViewBag.Description = selectItems;
+        }
 
         //
         // GET: /Transaction/
@@ -23,6 +45,17 @@ namespace FamilyPoints.MVC.Controllers
             var transactions = mgr.context.Transactions.Include(t => t.Parent).Include(t => t.Child);
             return View(transactions.ToList());
         }
+
+        public ActionResult ListTransactionsForChild(int childId)
+        {
+            Child child = childMgr.Find(childId);
+            var transactions=mgr.GetTransactionsForChild(child);
+            ViewData["ChildName"]=child.Name;
+            childMgr.CalculateCurrentPoints(child);
+            ViewData["CurrentPoints"] = child.CurrentPoints;
+           return View(transactions.ToList());
+        }
+
 
         //
         // GET: /Transaction/Details/5
@@ -44,6 +77,7 @@ namespace FamilyPoints.MVC.Controllers
         {
             ViewBag.ParentId = new SelectList(mgr.context.Parents, "ParentId", "Name");
             ViewBag.ChildId = new SelectList(mgr.context.Children, "ChildId", "Name");
+
             return View();
         }
 
@@ -59,7 +93,7 @@ namespace FamilyPoints.MVC.Controllers
             if (ModelState.IsValid)
             {
                 mgr.Create(transaction);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
 
             ViewBag.ParentId = new SelectList(mgr.context.Parents, "ParentId", "Name", transaction.ParentId);
@@ -72,8 +106,11 @@ namespace FamilyPoints.MVC.Controllers
         public ActionResult AddBehavior(int childId)
         {
             ViewBag.ParentId = new SelectList(mgr.context.Parents, "ParentId", "Name");
+            Child child = childMgr.Find(childId);
             ViewData["ChildId"] = childId;
+            ViewData["ChildName"] = child.Name;
             ViewData["PointType"] = "Behavior";
+            SetViewBagDescription("Behavior");
             return View();
         }
 
@@ -81,10 +118,13 @@ namespace FamilyPoints.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddBehavior(Transaction transaction)
         {
+            //Get the behavior description and points.
+            Behavior behavior = behaviorMgr.FindByDescription(transaction.Description);
+            transaction.Points = behavior.Points;
             if (ModelState.IsValid)
             {
                 mgr.Create(transaction);
-                return RedirectToAction("Index");
+                return RedirectToAction("ListTransactionsForChild", "Transaction", new { ChildId = transaction.ChildId });
             }
 
             ViewBag.ParentId = new SelectList(mgr.context.Parents, "ParentId", "Name", transaction.ParentId);
@@ -94,8 +134,11 @@ namespace FamilyPoints.MVC.Controllers
         public ActionResult AddReward(int childId)
         {
             ViewBag.ParentId = new SelectList(mgr.context.Parents, "ParentId", "Name");
+            Child child = childMgr.Find(childId);
             ViewData["ChildId"] = childId;
-            ViewData["PointType"] = "Behavior";
+            ViewData["ChildName"] = child.Name;
+            ViewData["PointType"] = "Reward";
+            SetViewBagDescription("Reward");
             return View();
         }
 
@@ -103,10 +146,13 @@ namespace FamilyPoints.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddReward(Transaction transaction)
         {
+            //Get the reward description and points.
+            Reward reward = rewardMgr.FindByDescription(transaction.Description);
+            transaction.Points = reward.Points;
             if (ModelState.IsValid)
             {
                 mgr.Create(transaction);
-                return RedirectToAction("Index");
+                return RedirectToAction("ListTransactionsForChild", "Transaction", new { ChildId = transaction.ChildId });
             }
 
             ViewBag.ParentId = new SelectList(mgr.context.Parents, "ParentId", "Name", transaction.ParentId);

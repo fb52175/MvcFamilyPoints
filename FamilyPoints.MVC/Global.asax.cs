@@ -19,7 +19,8 @@ namespace FamilyPoints.MVC
         protected void Application_Start()
         {
             //Database.SetInitializer<FamilyPointsContext>(new DropCreateDatabaseAlways<FamilyPointsContext>());
-            Database.SetInitializer<FamilyPointsContext>(new DropCreateDatabaseIfModelChanges<FamilyPointsContext>());
+            //Database.SetInitializer<FamilyPointsContext>(new DropCreateDatabaseIfModelChanges<FamilyPointsContext>());
+            Database.SetInitializer<FamilyPointsContext>(null);
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);

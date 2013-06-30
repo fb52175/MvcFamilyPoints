@@ -157,6 +157,10 @@ namespace MvcFamilyPoints.Tests
 
             // Assert -- The list of saved objects should have a count greater than 0
             Assert.IsTrue(savedObjs.Count > 0);
+
+            // Cleanup
+            db.Children.Remove(obj);
+            db.SaveChanges();
         }
 
 
